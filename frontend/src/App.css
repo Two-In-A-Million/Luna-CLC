@@ -67,25 +67,27 @@ a:hover {
 .main-card {
   margin-top: 2rem;
   max-width: 100dvw;
+  max-height: 90dvh;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  align-items: center;
 }
 
 /* character description section */
 .char-desc-div {
-  margin-right: 2rem;
-  width: 12dvw;
+  padding: 0 0.5rem 0 0.5rem;
+  width: 14rem;
 }
 
 .char-desc-div p {
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
   background-color: #51bef4;
   border-radius: 8px;
-  padding: 4px 0px;
+  padding: 4px 0px;  
+  margin: 0.8rem 0 0.5rem 0;
+
 }
 
 .char-desc-div .button-groups {
@@ -102,7 +104,7 @@ a:hover {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.2em 0.5em;
-  font-size: 1em;
+  font-size: 0.8rem;
   font-weight: 400;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -117,11 +119,6 @@ a:hover {
 .char-desc-div button:focus,
 .char-desc-div button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* skill selection section */
-.skill-selection-div {
-  width: 70dvw;
 }
 
 /* race selection section */
@@ -149,7 +146,7 @@ select {
   padding: 0 0.5em;
   color: #fff;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 0.8rem;
 }
 
 select::-ms-expand {
@@ -178,6 +175,55 @@ select::-ms-expand {
 }
 .select:hover::after {
    color: #51bef4;
+}
+
+/* skill selection section */
+.skill-selection-div {
+  margin-top: 0.8rem;
+  width: 50dvw;
+  background-color: #f9f9f9;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+}
+
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #1a1a1a;
+}
+
+.skill-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.skill-name {
+  margin-left: 0.5rem;
+}
+
+.skill-qty-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.skill-button {
+  border-radius: 8px;
+  border: none;
+  padding: 0.2em 0.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* other detail section */
+.other-detail-div {
+  width: 30dvw;
+  background-color: #f9f9f9;
 }
 
 @media (prefers-color-scheme: light) {

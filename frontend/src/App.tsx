@@ -98,10 +98,201 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="skill-selection-div"></div>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <div className="skill-selection-div">
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div className="skill-qty-div">
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div className="skill-qty-div">
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div className="skill-qty-div">
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div className="skill-qty-div">
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div className="skill-qty-div">
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div className="skill-qty-div">
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div className="skill-qty-div">
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+          <div className="skill-card">
+            <img src={archerIcon} className="skill-icon" />
+            <p className="skill-name"> Arrow Rain </p>
+            <div>
+              <button className="skill-button"> - </button>
+              <span className="skill-level"> 5 </span>
+              <button className="skill-button"> + </button>
+            </div>
+          </div>
+        </div>
+        <div className="other-detail-div">
+          <div className="char-detail-div"></div>
+          <div className="skill-detail-div"></div>
+        </div>
       </div>
     </div>
   );

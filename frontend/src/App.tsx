@@ -1,12 +1,40 @@
 import { useState } from "react";
-import lunaLogo from "/luna-logo.png";
-import mageIcon from "/mage.png";
-import warriorIcon from "/swords.png";
-import archerIcon from "/archery.png";
+import lunaLogo from "./assets/luna-logo.png";
+import mageIcon from "./assets/mage.png";
+import warriorIcon from "./assets/swords.png";
+import archerIcon from "./assets/archery.png";
 import "./App.css";
+import ButtonOptions from "./components/ButtonOptions";
 
 function App() {
   const [count, setCount] = useState(0);
+
+  const raceOptions = [
+      {
+          label : "Elf",
+          title : "mobil buat 1 keluarga besar",
+          imgButton: false
+      },
+      {
+          label : "Crab",
+          title : "kepiting, mau apa lagi?",
+          imgButton: false
+      }
+  ];
+  
+  const classOptions = [
+      {
+          label : "mage",
+          title : "mobil buat 1 keluarga besar",
+          imgButton: false
+      },
+      {
+          label : "Crab",
+          title : "kepiting, mau apa lagi?",
+          imgButton: false
+      }
+  ];
+
 
   return (
     <div className="main-div">
@@ -21,23 +49,8 @@ function App() {
       </div>
       <div className="main-card">
         <div className="char-desc-div">
-          <div className="race-div">
-            <p className="race-p"> Select Race </p>
-            <div className="button-groups">
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="mobil buat 1 keluarga besar"
-              >
-                Elf
-              </button>
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="kepiting, mau apa lagi?"
-              >
-                Crab
-              </button>
-            </div>
-          </div>
+          <ButtonOptions sectionName="race" options={raceOptions}/>
+          <ButtonOptions sectionName="class" options={classOptions}/>
           <div className="class-div">
             <p className="class-p"> Select Class </p>
             <div className="button-groups">

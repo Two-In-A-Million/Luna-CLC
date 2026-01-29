@@ -22,47 +22,6 @@
   max-width: 100dvw;
 }
 
-/* logo section */
-.logo-div {
-  display: flex;
-  flex-direction: column;
-  max-width: 14rem;
-  max-height: 6rem;
-  align-items: center;
-}
-
-.logo-div:hover {
-  filter: drop-shadow(0 0 3em #646cffaa);
-}
-
-.logo-div.react:hover {
-  filter: drop-shadow(0 0 3em #61dafbaa);
-}
-
-.logo {
-  width: 14rem;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-a {
-  height: 6rem;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-.logo-p {
-  width: 14rem;
-  font-size: small;
-  margin: 0;
-  text-align: center;
-  font-weight: bold;
-  color: #51bef4;
-}
-
 /* main card section */
 .main-card {
   margin-top: 2rem;
@@ -80,37 +39,6 @@ a:hover {
 }
 
 
-.char-desc-div .button-groups {
-  display: flex;
-  justify-content: center;
-  gap: 0.3rem;
-}
-
-.char-desc-div .button-groups button {
-  flex: 1;
-}
-
-.char-desc-div button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.2em 0.5em;
-  font-size: 0.8rem;
-  font-weight: 400;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-.char-desc-div button:hover {
-  border-color: #646cff;
-}
-
-.char-desc-div button:focus,
-.char-desc-div button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 /* race selection section */
 .race-p {
 }
@@ -119,52 +47,6 @@ a:hover {
 .class-icon {
   width: 1.5rem;
   height: 1.5rem;
-}
-
-/* level selection section */
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  outline: 0;
-  box-shadow: none;
-  border: 0 !important;
-  background-color: #1a1a1a;
-  background-image: none;
-  flex: 1;
-  padding: 0 0.5em;
-  color: #fff;
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-
-select::-ms-expand {
-  display: none;
-}
-
-.select {
-   position: relative;
-   display: flex;
-   height: 2em;
-   line-height: 2;
-   background: #5c6664;
-   overflow: hidden;
-   border-radius: .25em;
-}
-.select::after {
-   content: '\25BC';
-   position: absolute;
-   top: 0;
-   right: 0;
-   padding: 0 0.5em;
-   background: #2b2e2e;
-   cursor:pointer;
-   pointer-events:none;
-   transition:.25s all ease;
-}
-.select:hover::after {
-   color: #51bef4;
 }
 
 /* skill selection section */

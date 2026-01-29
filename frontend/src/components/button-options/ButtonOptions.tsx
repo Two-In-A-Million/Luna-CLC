@@ -1,4 +1,4 @@
-import type buttonDetail from "../models/buttonDetail";
+import type buttonDetail from "../../models/buttonDetail";
 import ButtonGroups from "./ButtonGroups";
 import classes from './ButtonOptions.module.css';
 

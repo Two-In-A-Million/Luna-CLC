@@ -1,115 +1,78 @@
 import { useState } from "react";
-import lunaLogo from "./assets/luna-logo.png";
 import mageIcon from "./assets/mage.png";
 import warriorIcon from "./assets/swords.png";
 import archerIcon from "./assets/archery.png";
 import "./App.css";
-import ButtonOptions from "./components/ButtonOptions";
+import ButtonOptions from "./components/button-options/ButtonOptions";
+import LogoSet from "./components/logo/LogoSet";
+import SelectionOptionGroups from "./components/selection-option-groups/SelectionOptionGroups";
 
 function App() {
   const [count, setCount] = useState(0);
 
   const raceOptions = [
-      {
-          label : "Elf",
-          title : "mobil buat 1 keluarga besar",
-          imgButton: false
-      },
-      {
-          label : "Crab",
-          title : "kepiting, mau apa lagi?",
-          imgButton: false
-      }
+    {
+      label: "Elf",
+      title: "mobil buat 1 keluarga besar",
+      img: null,
+      imgButton: false,
+    },
+    {
+      label: "Crab",
+      title: "kepiting, mau apa lagi?",
+      img: null,
+      imgButton: false,
+    },
+  ];
+
+  const classOptions = [
+    {
+      label: "mage",
+      title: "mage class",
+      img: mageIcon,
+      imgButton: true,
+    },
+    {
+      label: "warrior",
+      title: "warrior class",
+      img: warriorIcon,
+      imgButton: true,
+    },
+    {
+      label: "archer",
+      title: "archer class",
+      img: archerIcon,
+      imgButton: true,
+    },
+  ];
+
+  const selectionOptionGroups = [
+    {
+      sectionName: "level 20",
+      avbOptions: ["Guardian", "Pecundang"],
+    },
+    {
+      sectionName: "level 40",
+      avbOptions: ["Gabut", "Gabut", "Gabut", "Gabut"],
+    },
+    {
+      sectionName: "level 75",
+      avbOptions: ["Whaler", "Whaler", "Whaler", "Whaler"],
+    },
+    {
+      sectionName: "level 105",
+      avbOptions: ["Master", "Master Baiter", "Master", "Sword Master"],
+    }
   ];
   
-  const classOptions = [
-      {
-          label : "mage",
-          title : "mobil buat 1 keluarga besar",
-          imgButton: false
-      },
-      {
-          label : "Crab",
-          title : "kepiting, mau apa lagi?",
-          imgButton: false
-      }
-  ];
-
-
   return (
     <div className="main-div">
-      <div className="logo-div">
-        <a
-          href="https://www.google.com/search?client=opera-gx&q=luna&sourceid=opera&ie=UTF-8&oe=UTF-8"
-          target="_blank"
-        >
-          <img src={lunaLogo} className="logo" alt="Luna logo" />
-          <p className="logo-p">Luna Skill Calculator</p>
-        </a>
-      </div>
+      <LogoSet/>
       <div className="main-card">
         <div className="char-desc-div">
-          <ButtonOptions sectionName="race" options={raceOptions}/>
-          <ButtonOptions sectionName="class" options={classOptions}/>
-          <div className="class-div">
-            <p className="class-p"> Select Class </p>
-            <div className="button-groups">
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="mage kayak kontol"
-              >
-                <img src={mageIcon} className="class-icon" />
-              </button>
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="warrior chad"
-              >
-                <img src={warriorIcon} className="class-icon" />
-              </button>
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="archer pew pew"
-              >
-                <img src={archerIcon} className="class-icon" />
-              </button>
-            </div>
-          </div>
-          <div className="level-div">
-            <p className="level-p"> Level 20 </p>
-            <div className="select">
-              <select>
-                <option>Guardian</option>
-                <option>Pecundang</option>
-              </select>
-            </div>
-            <p className="level-p"> Level 40 </p>
-            <div className="select">
-              <select>
-                <option>Gabut</option>
-                <option>Gabut</option>
-                <option>Gabut</option>
-                <option>Gabut</option>
-              </select>
-            </div>
-            <p className="level-p"> Level 75 </p>
-            <div className="select">
-              <select>
-                <option>Whaler</option>
-                <option>Whaler</option>
-                <option>Whaler</option>
-                <option>Whaler</option>
-              </select>
-            </div>
-            <p className="level-p"> Level 105 </p>
-            <div className="select">
-              <select>
-                <option>Master</option>
-                <option>Master Baiter</option>
-                <option>Master</option>
-                <option>Sword Master</option>
-              </select>
-            </div>
-          </div>
+          <ButtonOptions sectionName="race" options={raceOptions} />
+          <ButtonOptions sectionName="class" options={classOptions} />
+          <SelectionOptionGroups sectionLists={selectionOptionGroups} />
         </div>
         <div className="skill-selection-div">
           <div className="skill-card">

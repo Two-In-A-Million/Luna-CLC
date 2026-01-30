@@ -202,6 +202,27 @@ function App() {
     {
       label: "Power Strike",
     },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
   ];
 
   return (
@@ -213,10 +234,21 @@ function App() {
           <ButtonOptions sectionName="class" options={classOptions} />
           <SelectionOptionGroups sectionLists={selectionOptionGroups} />
         </div>
-          <SkillOptions skillOptions={skillOptions}/>
+        <SkillOptions skillOptions={skillOptions}/>
         <div className="other-detail-div">
           <div className="char-detail-div"></div>
-          <div className="skill-detail-div"></div>
+          <div className="skill-detail-div">
+            <h2> Skill Information </h2>
+            <div className="skill-main-desc">
+              <div>
+                <img src={mageIcon} alt="skill icon" style={{width: "4rem", height: "4rem"}}/>
+                <span>
+                  <p className="skill-name"> Dildo Strike </p>
+                  <p className="skill-type"> Active Skill </p>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

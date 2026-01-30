@@ -5,6 +5,7 @@
   max-width: 14rem;
   max-height: 6rem;
   align-items: center;
+  margin-left: 1.5rem;
 }
 
 .logo:hover {
@@ -37,4 +38,11 @@ a:hover {
   text-align: center;
   font-weight: bold;
   color: #51bef4;
+}
+
+@media screen and (max-width: 1000px) {
+  .logo {
+    max-width: 100dvw;
+    justify-content: center;
+  }
 }

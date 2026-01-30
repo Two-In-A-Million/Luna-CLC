@@ -13,34 +13,31 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  max-height: 100dvh;
+  max-height: 95dvh;
   max-width: 100dvw;
 }
 
 .main-div {
-  max-height: 100dvh;
+  max-height: 95dvh;
   max-width: 100dvw;
+  display: flex;
+  flex-direction: column;
 }
 
 /* main card section */
 .main-card {
   margin-top: 2rem;
-  max-width: 100dvw;
-  max-height: 90dvh;
   display: flex;
+  flex: 1;
   justify-content: space-between;
-  flex-direction: row;
+  overflow: hidden;
 }
 
 /* character description section */
 .char-desc-div {
+  margin-left: 1.5rem;
   padding: 0 0.5rem 0 0.5rem;
   width: 14rem;
-}
-
-
-/* race selection section */
-.race-p {
 }
 
 /* class selection section */
@@ -49,75 +46,40 @@
   height: 1.5rem;
 }
 
-/* skill selection section */
-.skill-selection-div {
-  margin-top: 0.8rem;
-  width: 50dvw;
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: repeat(9, min-content);
-  grid-auto-rows: min-content;
+/* other detail section */
+.other-detail-div {
+  width: 30dvw;
+  background-color: #242424;
 }
 
-.skill-card {
-  max-height: 4rem;
-  cursor:pointer;
-  background-color: #51bef4;
-  border-radius: 8px;
-  padding: 0.2rem;
-}
-
-.skill-card-inner-div {
+/* skill detail section */
+.skill-detail-div {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-items: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-  padding: 0.5rem;
-  border-radius: 8px;
-  background-color: #ffffff;
-  color: #242424;
+  padding: 0 1rem 0 1rem;
 }
 
-.skill-icon {
-  width: 1rem;
-  height: 1rem;
-  margin-bottom: 0.5rem;
+.skill-detail-div h2 {
+  text-align: center;
+}
+
+.skill-main-desc div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 4rem;
 }
 
 .skill-name {
   margin: 0;
-}
-
-.skill-qty-div {
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 4rem;
-  height: 1.5rem;
-}
-
-.skill-card:hover .skill-qty-div {
-  opacity: 1;
-}
-
-.skill-button {
-  border-radius: 8px;
-  border: none;
-  padding: 0.2em 0.5em;
+  font-size: 1.2rem;
   font-weight: bold;
-  text-align: center;
 }
 
-/* other detail section */
-.other-detail-div {
-  width: 30dvw;
-  background-color: #f9f9f9;
+.skill-type {
+  margin: 1rem 0 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 @media (prefers-color-scheme: light) {
@@ -135,37 +97,25 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   .main-div {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .logo-div {
-    max-width: 100dvw;
-    justify-content: center;
-  }
-
   .main-card {
     flex-direction: column;
+    align-items: center;
+    overflow: scroll;
   }
 
   .char-desc-div {
     margin-right: 0;
+    margin-left: 0;
     margin-bottom: 2rem;
     max-width: 85dvw;
     width: 85dvw;
   }
-  
-  .skill-selection-div {
-    margin-top: 0.8rem;
-    width: 50dvw;
-    background-color: #f9f9f9;
-    display: grid;
-    grid-template-columns: auto auto auto auto ;
-  }
-}
 
-body {
 }

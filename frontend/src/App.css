@@ -53,35 +53,57 @@
 .skill-selection-div {
   margin-top: 0.8rem;
   width: 50dvw;
-  background-color: #f9f9f9;
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
+  gap: 0.5rem;
+  grid-template-columns: repeat(9, min-content);
+  grid-auto-rows: min-content;
 }
 
 .skill-card {
+  max-height: 4rem;
+  cursor:pointer;
+  background-color: #51bef4;
+  border-radius: 8px;
+  padding: 0.2rem;
+}
+
+.skill-card-inner-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  background-color: #1a1a1a;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #242424;
 }
 
 .skill-icon {
-  width: 2rem;
-  height: 2rem;
+  width: 1rem;
+  height: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .skill-name {
-  margin-left: 0.5rem;
+  margin: 0;
 }
 
 .skill-qty-div {
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  width: 4rem;
+  height: 1.5rem;
+}
+
+.skill-card:hover .skill-qty-div {
+  opacity: 1;
 }
 
 .skill-button {
@@ -114,6 +136,12 @@
 }
 
 @media screen and (max-width: 600px) {
+  .main-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .logo-div {
     max-width: 100dvw;
     justify-content: center;
@@ -128,6 +156,14 @@
     margin-bottom: 2rem;
     max-width: 85dvw;
     width: 85dvw;
+  }
+  
+  .skill-selection-div {
+    margin-top: 0.8rem;
+    width: 50dvw;
+    background-color: #f9f9f9;
+    display: grid;
+    grid-template-columns: auto auto auto auto ;
   }
 }
 

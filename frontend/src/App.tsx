@@ -10,7 +10,7 @@ import SkillOptions from "./components/skill-options/SkillOptions";
 
 function App() {
   const [data, setData] = useState(null);
-  
+
   const raceOptions = [
     {
       label: "Elf",
@@ -62,8 +62,15 @@ function App() {
     },
     {
       sectionName: "level 105",
-      avbOptions: ["Paladin", "Panzer", "Crusader", "Destroyer", "Sword Master", "None"],
-    }
+      avbOptions: [
+        "Paladin",
+        "Panzer",
+        "Crusader",
+        "Destroyer",
+        "Sword Master",
+        "None",
+      ],
+    },
   ];
 
   const skillOptions = [
@@ -227,27 +234,62 @@ function App() {
 
   return (
     <div className="main-div">
-      <LogoSet/>
+      <LogoSet />
       <div className="main-card">
         <div className="char-desc-div">
           <ButtonOptions sectionName="race" options={raceOptions} />
           <ButtonOptions sectionName="class" options={classOptions} />
           <SelectionOptionGroups sectionLists={selectionOptionGroups} />
         </div>
-        <SkillOptions skillOptions={skillOptions}/>
-        <div className="other-detail-div">
-          <div className="char-detail-div"></div>
-          <div className="skill-detail-div">
-            <h2> Skill Information </h2>
-            <div className="skill-main-desc">
-              <div>
-                <img src={mageIcon} alt="skill icon" style={{width: "4rem", height: "4rem"}}/>
-                <span>
-                  <p className="skill-name"> Dildo Strike </p>
-                  <p className="skill-type"> Active Skill </p>
-                </span>
-              </div>
+        <SkillOptions skillOptions={skillOptions} />
+        <div className="skill-detail-div">
+          <h2> Skill Information </h2>
+          <div className="skill-main-desc">
+            <div className="skill-info">
+              <img
+                src={mageIcon}
+                alt="skill icon"
+                style={{ width: "4rem", height: "4rem" }}
+              />
+              <span>
+                <p className="skill-name"> Dildo Strike </p>
+                <p className="skill-type"> Active Skill </p>
+              </span>
             </div>
+            <span className="skill-stats">
+              <div>
+                <img
+                  src={warriorIcon}
+                  alt="cd icon"
+                  style={{ width: "1rem", height: "1rem" }}
+                />
+                <p className="skill-cd"> 10.0s</p>
+              </div>
+              <div>
+                <img
+                  src={warriorIcon}
+                  alt="mana icon"
+                  style={{ width: "1rem", height: "1rem" }}
+                />
+                <p className="skill-mana"> 20 MP </p>
+              </div>
+              <div>
+                <img
+                  src={warriorIcon}
+                  alt="sp icon"
+                  style={{ width: "1rem", height: "1rem" }}
+                />
+                <p className="skill-sp"> 1 </p>
+              </div>
+            </span>
+          </div>
+          <div className="skill-description">
+            <p>Skill Description:</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            </p>
           </div>
         </div>
       </div>

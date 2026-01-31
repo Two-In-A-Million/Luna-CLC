@@ -44,5 +44,6 @@ a:hover {
   .logo {
     max-width: 100dvw;
     justify-content: center;
+    margin: 0;
   }
 }

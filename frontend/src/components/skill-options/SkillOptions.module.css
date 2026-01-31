@@ -39,8 +39,11 @@
 
 @media screen and (max-width: 1100px) {
   .skillSelectionDiv {
+    width: 85dvw;
     margin-top: 0.8rem;
     display: grid;
     grid-template-columns: auto auto auto auto;
+    overflow-y: visible;
+    flex-shrink: 0;
   }
 }

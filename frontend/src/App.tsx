@@ -7,6 +7,7 @@ import ButtonOptions from "./components/button-options/ButtonOptions";
 import LogoSet from "./components/logo/LogoSet";
 import SelectionOptionGroups from "./components/selection-option-groups/SelectionOptionGroups";
 import SkillOptions from "./components/skill-options/SkillOptions";
+import SkillInfo from "./components/skill-info/SkillInfo";
 
 function App() {
   const [data, setData] = useState(null);
@@ -234,63 +235,28 @@ function App() {
 
   return (
     <div className="main-div">
-      <LogoSet />
       <div className="main-card">
         <div className="char-desc-div">
+          <LogoSet />
           <ButtonOptions sectionName="race" options={raceOptions} />
           <ButtonOptions sectionName="class" options={classOptions} />
           <SelectionOptionGroups sectionLists={selectionOptionGroups} />
         </div>
         <SkillOptions skillOptions={skillOptions} />
-        <div className="skill-detail-div">
-          <h2> Skill Information </h2>
-          <div className="skill-main-desc">
-            <div className="skill-info">
-              <img
-                src={mageIcon}
-                alt="skill icon"
-                style={{ width: "4rem", height: "4rem" }}
-              />
-              <span>
-                <p className="skill-name"> Dildo Strike </p>
-                <p className="skill-type"> Active Skill </p>
-              </span>
-            </div>
-            <span className="skill-stats">
-              <div>
-                <img
-                  src={warriorIcon}
-                  alt="cd icon"
-                  style={{ width: "1rem", height: "1rem" }}
-                />
-                <p className="skill-cd"> 10.0s</p>
-              </div>
-              <div>
-                <img
-                  src={warriorIcon}
-                  alt="mana icon"
-                  style={{ width: "1rem", height: "1rem" }}
-                />
-                <p className="skill-mana"> 20 MP </p>
-              </div>
-              <div>
-                <img
-                  src={warriorIcon}
-                  alt="sp icon"
-                  style={{ width: "1rem", height: "1rem" }}
-                />
-                <p className="skill-sp"> 1 </p>
-              </div>
-            </span>
-          </div>
-          <div className="skill-description">
-            <p>Skill Description:</p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            </p>
-          </div>
+        <SkillInfo />
+      </div>
+      <div className="sp-needed">
+        <div className="stat-display">
+          <span className="stat-label">Total SP</span>
+          <span className="stat-value primary">10</span>
+        </div>
+        <div className="stat-display">
+          <span className="stat-label">Total Gold</span>
+          <span className="stat-value accent">123123123</span>
+        </div>
+        <div className="stat-display">
+          <span className="stat-label">SP Remaining</span>
+          <span className="stat-value success">12</span>
         </div>
       </div>
     </div>

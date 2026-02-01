@@ -4,13 +4,11 @@ export default function SelectionOption({sectionName, avbOptions} : {sectionName
   return (
     <>
       <p className={classes.p}> {sectionName} </p>
-      <div className={classes.selectOption}>
-        <select>
+        <select className={classes.selectOption}>
           {avbOptions.map((option) => (
             <option key={option}>{option}</option>
           ))}
         </select>
-      </div>
     </>
   );
 }

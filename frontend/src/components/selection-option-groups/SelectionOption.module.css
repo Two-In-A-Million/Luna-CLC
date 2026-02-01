@@ -1,56 +1,45 @@
 .p {
   text-align: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-  background-color: #51bef4;
+  font-size: 1.125rem;
+  background: linear-gradient(180deg, #00d9ff 0%, #0099b3 100%);
   border-radius: 8px;
-  padding: 4px 0px;  
+  padding: 4px 0px;
   margin: 0.8rem 0 0.5rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .selectOption {
-   position: relative;
-   display: flex;
-   height: 2em;
-   line-height: 2;
-   background: #5c6664;
-   overflow: hidden;
-   border-radius: .25em;
+  display: flex;
+  border-radius: 0.25em;
+  background: #3a3a5c;
+  border: 2px solid #4a4a7c;
+  padding: 8px 12px;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  font-size: 1rem;
+  font-family: inherit;
 }
 
 .selectOption::after {
-   content: '\25BC';
-   position: absolute;
-   top: 0;
-   right: 0;
-   padding: 0 0.5em;
-   background: #2b2e2e;
-   cursor:pointer;
-   pointer-events:none;
-   transition:.25s all ease;
-}
-
-.selectOption:hover::after {
-   color: #51bef4;
-}
-
-.selectOption select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  outline: 0;
-  box-shadow: none;
-  border: 0 !important;
-  background-color: #1a1a1a;
-  background-image: none;
-  flex: 1;
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
   padding: 0 0.5em;
-  color: #fff;
+  background: #2b2e2e;
   cursor: pointer;
-  font-size: 0.8rem;
+  pointer-events: none;
+  transition: 0.25s all ease;
 }
 
-.selectOption select::-ms-expand {
+.selectOption:hover {
+  background: #3a3a5c;
+  border-color: #ffd700;
+  color: #51bef4;
+}
+
+.selectOption ::-ms-expand {
   display: none;
 }

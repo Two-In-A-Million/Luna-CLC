@@ -19,11 +19,17 @@
   color: black;
   border-radius: 8px;
   padding: 4px 0px;  
-  margin: 0.8rem 0 0.7rem 0;
+  margin: 0.8rem 1rem 0.7rem 1rem;
+}
+
+.skillDesc {
+  margin: 1rem;
 }
 
 @media screen and (max-width: 1000px) {
   .skillInfo {
+    margin: 0 0.5rem 0 0.5rem;
+    padding: 0;
     margin-right: 0;
     margin-left: 0;
     margin-bottom: 2rem;

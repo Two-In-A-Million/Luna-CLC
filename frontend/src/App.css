@@ -3,7 +3,6 @@
 
 /* main root section */
 #luna-skill-calc {
-  color-scheme: light dark;
   color: #eaf6ff;
   background-color: #1a1a2e;
 
@@ -69,22 +68,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-}
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  .char-desc-div button {
-    background-color: #f9f9f9;
-  }
 }
 
 @media screen and (max-width: 1000px) {

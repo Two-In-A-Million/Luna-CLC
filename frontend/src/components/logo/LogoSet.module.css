@@ -53,4 +53,8 @@ a:hover {
     justify-content: center;
     margin: 0;
   }
+
+  .logo p {
+    width: 100%;
+  }
 }

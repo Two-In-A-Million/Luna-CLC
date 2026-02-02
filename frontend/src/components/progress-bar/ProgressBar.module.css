@@ -1,0 +1,47 @@
+.barBackground {
+  background-color: #2a2a4a;
+  border-color: #4a4a7c;
+  border-radius: 3px;
+  width: 100%;
+  height: 4px;
+}
+
+.barBackground div {
+  height: 100%;
+  background: linear-gradient(90deg, #7cff6b 0%, #4ade80 100%);
+  transition: width 0.2s ease;
+  border-radius: 3px;
+}
+
+.p {
+  margin: 0;
+  font-weight: bold;
+  text-align: center;
+  font-size: 12px;
+  font-family: "VT323", monospace;
+}
+
+.span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 1.5rem;
+  margin: 0.2rem 0 0.1rem 0;
+  background-color: #00d9ff;
+  color: #1a1a2e;
+}
+
+.span button {
+  color: #ffd700;
+  background: linear-gradient(145deg, #2a2a4a 0%, #1a1a30 100%);
+  border: 2px solid #4a4a7c;
+}
+
+.span button:hover {
+  border-color: #ffd700;
+  background: linear-gradient(145deg, #3a3a5a 0%, #2a2a40 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}

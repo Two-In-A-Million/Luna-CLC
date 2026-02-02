@@ -1,0 +1,41 @@
+.skillInfo{
+  width: 13dvw;
+  margin-right: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  background: #252547;
+  border: 3px solid #4a4a7c;
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.skillInfo h2 {
+  text-align: center;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  background-color: #ffd700;
+  color: black;
+  border-radius: 8px;
+  padding: 4px 0px;  
+  margin: 0.8rem 1rem 0.7rem 1rem;
+}
+
+.skillDesc {
+  margin: 1rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .skillInfo {
+    margin: 0 0.5rem 0 0.5rem;
+    padding: 0;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 2rem;
+    max-width: 85dvw;
+    width: 85dvw;
+    flex-shrink: 0;
+  }
+
+}

@@ -1,107 +1,277 @@
-import { useState } from "react";
-import lunaLogo from "/luna-logo.png";
-import mageIcon from "/mage.png";
-import warriorIcon from "/swords.png";
-import archerIcon from "/archery.png";
+import { useEffect, useState } from "react";
+import mageIcon from "./assets/mage.png";
+import warriorIcon from "./assets/swords.png";
+import archerIcon from "./assets/archery.png";
 import "./App.css";
+import ButtonOptions from "./components/button-options/ButtonOptions";
+import LogoSet from "./components/logo/LogoSet";
+import SelectionOptionGroups from "./components/selection-option-groups/SelectionOptionGroups";
+import SkillOptions from "./components/skill-options/SkillOptions";
+import SkillInfo from "./components/skill-info/SkillInfo";
 
 function App() {
-  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let meta = document.querySelector('meta[name="viewport"]') as HTMLMetaElement | null;
+
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "viewport";
+      document.head.appendChild(meta);
+    }
+
+    meta.content = "width=device-width, initial-scale=1";
+
+    // get data
+  }, []);
+
+  const [data, setData] = useState(null);
+
+  const raceOptions = [
+    {
+      label: "Elf",
+      title: "mobil buat 1 keluarga besar",
+      img: null,
+      imgButton: false,
+    },
+    {
+      label: "Human",
+      title: "yaa orang biasa aja",
+      img: null,
+      imgButton: false,
+    },
+  ];
+
+  const classOptions = [
+    {
+      label: "mage",
+      title: "mage class",
+      img: mageIcon,
+      imgButton: true,
+    },
+    {
+      label: "warrior",
+      title: "warrior class",
+      img: warriorIcon,
+      imgButton: true,
+    },
+    {
+      label: "archer",
+      title: "archer class",
+      img: archerIcon,
+      imgButton: true,
+    },
+  ];
+
+  const selectionOptionGroups = [
+    {
+      sectionName: "level 20",
+      avbOptions: ["Guard", "Warrior", "None"],
+    },
+    {
+      sectionName: "level 40",
+      avbOptions: ["Infantry", "Swordsman", "Mercenary", "None"],
+    },
+    {
+      sectionName: "level 75",
+      avbOptions: ["Mercenary", "Knight", "Gladiator", "None"],
+    },
+    {
+      sectionName: "level 105",
+      avbOptions: [
+        "Paladin",
+        "Panzer",
+        "Crusader",
+        "Destroyer",
+        "Sword Master",
+        "None",
+      ],
+    },
+  ];
+
+  const skillOptions = [
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+    {
+      label: "Power Strike",
+    },
+  ];
 
   return (
     <div className="main-div">
-      <div className="logo-div">
-        <a
-          href="https://www.google.com/search?client=opera-gx&q=luna&sourceid=opera&ie=UTF-8&oe=UTF-8"
-          target="_blank"
-        >
-          <img src={lunaLogo} className="logo" alt="Luna logo" />
-          <p className="logo-p">Luna Skill Calculator</p>
-        </a>
-      </div>
       <div className="main-card">
         <div className="char-desc-div">
-          <div className="race-div">
-            <p className="race-p"> Select Race </p>
-            <div className="button-groups">
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="mobil buat 1 keluarga besar"
-              >
-                Elf
-              </button>
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="kepiting, mau apa lagi?"
-              >
-                Crab
-              </button>
-            </div>
-          </div>
-          <div className="class-div">
-            <p className="class-p"> Select Class </p>
-            <div className="button-groups">
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="mage kayak kontol"
-              >
-                <img src={mageIcon} className="class-icon" />
-              </button>
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="warrior chad"
-              >
-                <img src={warriorIcon} className="class-icon" />
-              </button>
-              <button
-                onClick={() => setCount((count) => count + 1)}
-                title="archer pew pew"
-              >
-                <img src={archerIcon} className="class-icon" />
-              </button>
-            </div>
-          </div>
-          <div className="level-div">
-            <p className="level-p"> Level 20 </p>
-            <div className="select">
-              <select>
-                <option>Guardian</option>
-                <option>Pecundang</option>
-              </select>
-            </div>
-            <p className="level-p"> Level 40 </p>
-            <div className="select">
-              <select>
-                <option>Gabut</option>
-                <option>Gabut</option>
-                <option>Gabut</option>
-                <option>Gabut</option>
-              </select>
-            </div>
-            <p className="level-p"> Level 75 </p>
-            <div className="select">
-              <select>
-                <option>Whaler</option>
-                <option>Whaler</option>
-                <option>Whaler</option>
-                <option>Whaler</option>
-              </select>
-            </div>
-            <p className="level-p"> Level 105 </p>
-            <div className="select">
-              <select>
-                <option>Master</option>
-                <option>Master Baiter</option>
-                <option>Master</option>
-                <option>Sword Master</option>
-              </select>
-            </div>
-          </div>
+          <LogoSet />
+          <ButtonOptions sectionName="race" options={raceOptions} />
+          <ButtonOptions sectionName="class" options={classOptions} />
+          <SelectionOptionGroups sectionLists={selectionOptionGroups} />
         </div>
-        <div className="skill-selection-div"></div>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <SkillOptions skillOptions={skillOptions} />
+        <SkillInfo />
+      </div>
+      <div className="sp-needed">
+        <div className="stat-display">
+          <span className="stat-label">Total SP</span>
+          <span className="stat-value primary">10</span>
+        </div>
+        <div className="stat-display">
+          <span className="stat-label">Total Gold</span>
+          <span className="stat-value accent">123123123</span>
+        </div>
+        <div className="stat-display">
+          <span className="stat-label">SP Remaining</span>
+          <span className="stat-value success">12</span>
+        </div>
       </div>
     </div>
   );

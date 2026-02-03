@@ -19,12 +19,21 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/get-all-skill', async(req, res) => {
-    const test = await pool.query("SELECT * FROM job_skill");
-    // const testJson = await test.json();
+app.get('/get-job-list', async(req, res) => {
+    const jobs = await pool.query("\
+      SELECT\
+        jl.race,\
+        jl.job_name,\
+        jl.level,\
+        jl.job_id\
+      FROM\
+        job_list jl\
+      WHERE\
+        jl.race != 'Devil'\
+        AND level != 145 \
+    ");
 
-
-    res.status(200).json({text: 'hello', query: test})
+    res.status(200).json({text: 'job-list', query: jobs})
 });
 
 // app.get('/places', async (req, res) => {

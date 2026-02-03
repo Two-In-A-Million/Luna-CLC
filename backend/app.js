@@ -5,7 +5,7 @@ import pool from './db.js';
 
 const app = express();
 
-
+app.use(express.json()); 
 // app.use(express.static('images'));
 // app.use(bodyParser.json());
 
@@ -25,6 +25,53 @@ app.get('/get-all-skill', async(req, res) => {
 
 
     res.status(200).json({text: 'hello', query: test})
+
+})
+
+app.get('/get-all-job-list', async(req, res) => {
+    const jobs = await pool.query("\
+      SELECT\
+        jl.race,\
+        jl.job_name,\
+        jl.level,\
+        jl.job_id\
+      FROM\
+        job_list jl\
+      WHERE\
+        jl.race != 'Devil'\
+        AND level != 145 \
+    ");
+
+    res.status(200).json({text: 'job-list', query: jobs})
+});
+
+app.post('/get-job-list', async(req, res) => {
+  const {charDetail} = req.body;
+  const jobs = await pool.query("\
+      SELECT\
+        jl.race,\
+        jl.job_name,\
+        jl.level,\
+        jl.job_id\
+      FROM\
+        job_list jl\
+      WHERE\
+        jl.race != 'Devil'\
+        AND jl.level != 145 \
+        AND jl.level != 0\
+        AND jl.race = '"+charDetail.race+"'\
+        AND LEFT(jl.job_id::text,2 ) = (\
+          SELECT\
+            LEFT(jl.job_id::text,2)\
+          FROM\
+            job_list jl\
+          WHERE\
+            jl.race = '"+charDetail.race+"'\
+            AND jl.job_name = '"+charDetail.class+"'\
+        )\
+    ");
+
+  res.status(200).json({text: 'job-list', query: jobs.rows})
 });
 
 // app.get('/places', async (req, res) => {

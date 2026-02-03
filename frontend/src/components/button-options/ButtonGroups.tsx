@@ -3,37 +3,34 @@ import classes from "./ButtonGroups.module.css";
 
 export default function ButtonGroups({
   buttonDetails,
+  selected,
+  onClickEvent,
 }: {
-  buttonDetails: buttonDetail[];
+  buttonDetails: buttonDetail;
+  selected: string;
+  onClickEvent: () => void;
 }) {
   return (
-    <div className={classes.div}>
-      {buttonDetails.map((buttonDetail) => {
-        return (() => {
-          if (buttonDetail.imgButton) {
-            return (
-              <button
-                // onClick={ }
-                title={buttonDetail.title}
-                key={buttonDetail.label}
-              >
-                <img src={buttonDetail.img ?? ""} className="class-icon" />
-              </button>
-            );
-          } 
-          else if (!buttonDetail.imgButton) {
-            return (
-              <button
-                // onClick={ }
-                title={buttonDetail.title}
-                key={buttonDetail.label}
-              >
-                {buttonDetail.label}
-              </button>
-            );
-          }
-        })();
-      })}
-    </div>
+    <>
+      {buttonDetails.imgButton ? (
+        <button
+          onClick={onClickEvent}
+          title={buttonDetails.title}
+          key={buttonDetails.label}
+          className={selected === buttonDetails.label ? classes.active : ""}
+        >
+          <img src={buttonDetails.img ?? ""} className="class-icon" />
+        </button>
+      ) : (
+        <button
+          onClick={onClickEvent}
+          title={buttonDetails.title}
+          key={buttonDetails.label}
+          className={selected === buttonDetails.label ? classes.active : ""}
+        >
+          {buttonDetails.label}
+        </button>
+      )}
+    </>
   );
 }

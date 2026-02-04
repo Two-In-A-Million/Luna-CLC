@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: pg_import
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: luna
+      POSTGRES_USER: lunaCalculator
+      POSTGRES_PASSWORD: 201007
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ${PG_SCRIPT_PATH}:/script
+volumes:
+  pgdata:

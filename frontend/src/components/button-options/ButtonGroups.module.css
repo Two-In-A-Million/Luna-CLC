@@ -1,32 +1,4 @@
-.div {
-  display: flex;
-  justify-content: center;
-  gap: 0.3rem;
-}
-
-.div button {
-  flex: 1;
-}
-
-.div button {
-  border-radius: 8px;
-  border: 2px solid #4a4a7c;
-  padding: 0.2em 0.5em;
-  font-size: 1rem;
-  font-family: inherit;
-  background-color: #3a3a5c;
-  cursor: pointer;
-  transition: all 0.1s ease;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-}
-
-.div button:hover {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
-  background: rgba(255, 215, 0, 0.2);
-}
-
-.div button:focus,
-.div button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.active {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
 }

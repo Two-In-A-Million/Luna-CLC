@@ -10,8 +10,14 @@ import SkillOptions from "./components/skill-options/SkillOptions";
 import SkillInfo from "./components/skill-info/SkillInfo";
 
 function App() {
+  const [currJobLists, setJobLists] = useState(null);
+  const [currRace, setRace] = useState("Human");
+  const [currCharClass, setCharClass] = useState("Warrior");
+
   useEffect(() => {
-    let meta = document.querySelector('meta[name="viewport"]') as HTMLMetaElement | null;
+    let meta = document.querySelector(
+      'meta[name="viewport"]',
+    ) as HTMLMetaElement | null;
 
     if (!meta) {
       meta = document.createElement("meta");
@@ -22,9 +28,27 @@ function App() {
     meta.content = "width=device-width, initial-scale=1";
 
     // get data
-  }, []);
+    async function getJobListData() {
+      let charDetail = {
+        race: currRace,
+        class: currCharClass
+      }
 
-  const [data, setData] = useState(null);
+      let getJobList = await fetch("http://localhost:3000/get-job-list", {
+        method: "POST",
+        body: JSON.stringify({charDetail : charDetail}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let jobList = await getJobList.json();
+    console.log(jobList)
+      setJobLists(jobList);
+    }
+
+    getJobListData();
+
+  }, [currRace, currCharClass]);
 
   const raceOptions = [
     {
@@ -43,19 +67,19 @@ function App() {
 
   const classOptions = [
     {
-      label: "mage",
+      label: "Mage",
       title: "mage class",
       img: mageIcon,
       imgButton: true,
     },
     {
-      label: "warrior",
+      label: "Fighter",
       title: "warrior class",
       img: warriorIcon,
       imgButton: true,
     },
     {
-      label: "archer",
+      label: "Rogue",
       title: "archer class",
       img: archerIcon,
       imgButton: true,
@@ -247,13 +271,43 @@ function App() {
     },
   ];
 
+  function onChangeRace(race: string) {
+    setRace((prevRace) => {
+      if (prevRace != race) {
+        return race;
+      } else {
+        return prevRace;
+      }
+    });
+  }
+
+  function onChangeClass(charClass: string) {
+    setCharClass((prevCharClass) => {
+      if (prevCharClass != charClass) {
+        return charClass;
+      } else {
+        return prevCharClass;
+      }
+    });
+  }
+
   return (
     <div className="main-div">
       <div className="main-card">
         <div className="char-desc-div">
           <LogoSet />
-          <ButtonOptions sectionName="race" options={raceOptions} />
-          <ButtonOptions sectionName="class" options={classOptions} />
+          <ButtonOptions
+            sectionName="race"
+            options={raceOptions}
+            selected={currRace}
+            onClickEvent={onChangeRace}
+          />
+          <ButtonOptions
+            sectionName="class"
+            options={classOptions}
+            selected={currCharClass}
+            onClickEvent={onChangeClass}
+          />
           <SelectionOptionGroups sectionLists={selectionOptionGroups} />
         </div>
         <SkillOptions skillOptions={skillOptions} />

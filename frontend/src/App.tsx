@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import mageIcon from "./assets/mage.png";
-import warriorIcon from "./assets/swords.png";
-import archerIcon from "./assets/archery.png";
+import fighterIcon from "./assets/fighter.png";
+import archerIcon from "./assets/rogue.png";
 import "./App.css";
 import ButtonOptions from "./components/button-options/ButtonOptions";
 import LogoSet from "./components/logo/LogoSet";
@@ -11,8 +11,36 @@ import SkillInfo from "./components/skill-info/SkillInfo";
 
 function App() {
   const [currJobLists, setJobLists] = useState(null);
-  const [currRace, setRace] = useState("Human");
-  const [currCharClass, setCharClass] = useState("Warrior");
+  const [currRace, setRace] = useState("Elf");
+  const [currCharClass, setCharClass] = useState("Mage");
+  const [currSkillReqDetail, setSkillReqDetail] = useState({
+    totalSP: 0,
+    totalGold: 0,
+    spRemain: 3074,
+  });
+  const [currSkillLists, setSkillLists] = useState();
+  const [currJobDetails, setJobDetails] = useState([
+    {
+      sectionName: "level 20",
+      levelCap: 20,
+      selected: 0,
+    },
+    {
+      sectionName: "level 40",
+      levelCap: 40,
+      selected: 0,
+    },
+    {
+      sectionName: "level 75",
+      levelCap: 75,
+      selected: 0,
+    },
+    {
+      sectionName: "level 105",
+      levelCap: 105,
+      selected: 0,
+    },
+  ]);
 
   useEffect(() => {
     let meta = document.querySelector(
@@ -31,24 +59,53 @@ function App() {
     async function getJobListData() {
       let charDetail = {
         race: currRace,
-        class: currCharClass
-      }
+        class: currCharClass,
+      };
 
       let getJobList = await fetch("http://localhost:3000/get-job-list", {
         method: "POST",
-        body: JSON.stringify({charDetail : charDetail}),
+        body: JSON.stringify({ charDetail: charDetail }),
         headers: {
           "Content-Type": "application/json",
         },
       });
       let jobList = await getJobList.json();
-    console.log(jobList)
-      setJobLists(jobList);
+      setJobLists(jobList.query);
     }
 
     getJobListData();
-
   }, [currRace, currCharClass]);
+
+  useEffect(() => {
+    // get skill list
+    async function getSkillListData() {
+      let charDetail = {
+        race: currRace,
+        class: currCharClass,
+      };
+
+      currJobDetails.map((jobDetail) => {
+        charDetail = {
+          ...charDetail,
+          [`jobId${jobDetail.levelCap}`] : jobDetail.selected === 0 ? 'None' : jobDetail.selected
+        }
+      })
+
+      let getSkillList = await fetch("http://localhost:3000/get-skill-list", {
+        method: "POST",
+        body: JSON.stringify({ charDetail: charDetail }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let skillList = await getSkillList.json();
+
+      console.log(skillList);
+      setSkillLists(skillList.query);
+    }
+
+    getSkillListData();
+  }, [currJobDetails])
 
   const raceOptions = [
     {
@@ -68,47 +125,21 @@ function App() {
   const classOptions = [
     {
       label: "Mage",
-      title: "mage class",
+      title: "Mage class",
       img: mageIcon,
       imgButton: true,
     },
     {
       label: "Fighter",
-      title: "warrior class",
-      img: warriorIcon,
+      title: "Fighter class",
+      img: fighterIcon,
       imgButton: true,
     },
     {
       label: "Rogue",
-      title: "archer class",
+      title: "Rogue class",
       img: archerIcon,
       imgButton: true,
-    },
-  ];
-
-  const selectionOptionGroups = [
-    {
-      sectionName: "level 20",
-      avbOptions: ["Guard", "Warrior", "None"],
-    },
-    {
-      sectionName: "level 40",
-      avbOptions: ["Infantry", "Swordsman", "Mercenary", "None"],
-    },
-    {
-      sectionName: "level 75",
-      avbOptions: ["Mercenary", "Knight", "Gladiator", "None"],
-    },
-    {
-      sectionName: "level 105",
-      avbOptions: [
-        "Paladin",
-        "Panzer",
-        "Crusader",
-        "Destroyer",
-        "Sword Master",
-        "None",
-      ],
     },
   ];
 
@@ -291,6 +322,22 @@ function App() {
     });
   }
 
+  function onSelectJob({
+    levelCap,
+    value,
+  }: {
+    levelCap: number;
+    value: number;
+  }) {
+    setJobDetails((prevDetails) => 
+      prevDetails.map((prevDetail) => 
+        prevDetail.levelCap === levelCap
+          ? { ...prevDetail, selected: value }
+          : prevDetail
+      )
+    );
+  }
+
   return (
     <div className="main-div">
       <div className="main-card">
@@ -308,7 +355,11 @@ function App() {
             selected={currCharClass}
             onClickEvent={onChangeClass}
           />
-          <SelectionOptionGroups sectionLists={selectionOptionGroups} />
+          <SelectionOptionGroups
+            sectionLists={currJobDetails}
+            jobLists={currJobLists}
+            onSelectJob={onSelectJob}
+          />
         </div>
         <SkillOptions skillOptions={skillOptions} />
         <SkillInfo />
@@ -316,15 +367,21 @@ function App() {
       <div className="sp-needed">
         <div className="stat-display">
           <span className="stat-label">Total SP</span>
-          <span className="stat-value primary">10</span>
+          <span className="stat-value primary">
+            {currSkillReqDetail.totalSP}
+          </span>
         </div>
         <div className="stat-display">
           <span className="stat-label">Total Gold</span>
-          <span className="stat-value accent">123123123</span>
+          <span className="stat-value accent">
+            {currSkillReqDetail.totalGold}
+          </span>
         </div>
         <div className="stat-display">
           <span className="stat-label">SP Remaining</span>
-          <span className="stat-value success">12</span>
+          <span className="stat-value success">
+            {currSkillReqDetail.spRemain}
+          </span>
         </div>
       </div>
     </div>

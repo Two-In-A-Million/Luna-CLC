@@ -1,10 +1,12 @@
 class selectionSectionList {
     sectionName: string;
-    avbOptions: string[];
+    levelCap: number;
+    selected: number;
 
-    constructor(sectionName: string, avbOptions: string[]){
+    constructor(sectionName: string, levelCap: number, selected: number){
         this.sectionName = sectionName;
-        this.avbOptions = avbOptions;
+        this.levelCap = levelCap;
+        this.selected = selected;
     }
 }
 

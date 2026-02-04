@@ -21,6 +21,7 @@ export default function ButtonOptions({
         {options.map((option) => {
           return (
             <ButtonGroups
+              key={option.label}
               buttonDetails={option}
               selected={selected}
               onClickEvent={() => onClickEvent(option.label)}

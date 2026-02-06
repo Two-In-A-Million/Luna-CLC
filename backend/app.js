@@ -2,10 +2,7 @@ import fs from 'node:fs/promises';
 
 import express from 'express';
 import pool from './db.js';
-<<<<<<< Updated upstream
-=======
 import { json } from 'node:stream/consumers';
->>>>>>> Stashed changes
 
 const app = express();
 
@@ -78,25 +75,6 @@ app.post('/get-job-list', async(req, res) => {
   res.status(200).json({text: 'job-list', query: jobs.rows})
 });
 
-<<<<<<< Updated upstream
-=======
-app.post('/get-skill-list', async(req, res) => {
-  const {charDetail} = req.body;
-
-  const baseJobId = await pool.query("\
-      SELECT\
-        jl.job_id\
-      FROM\
-        job_list jl\
-      WHERE\
-        jl.race != 'Devil'\
-        AND jl.level != 145 \
-        AND jl.level = 0\
-        AND jl.race = '"+charDetail.race+"'\
-        AND jl.job_name = '"+charDetail.class+"'\
-    ");
-
-
   const jobIds = Object.entries(charDetail)
     .filter(([key, value]) => key.startsWith('jobId') && value !== 'None')
     .map(([, value]) => value);
@@ -147,7 +125,6 @@ app.post('/get-skill-list', async(req, res) => {
   res.status(200).json({query: skills.rows})
 });
 
->>>>>>> Stashed changes
 // app.get('/places', async (req, res) => {
 //   const fileContent = await fs.readFile('./data/places.json');
 

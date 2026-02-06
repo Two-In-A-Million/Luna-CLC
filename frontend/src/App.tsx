@@ -18,7 +18,7 @@ function App() {
     totalGold: 0,
     spRemain: 3074,
   });
-  const [currSkillLists, setSkillLists] = useState();
+  const [currSkillLists, setSkillLists] = useState([]);
   const [currJobDetails, setJobDetails] = useState([
     {
       sectionName: "level 20",
@@ -105,7 +105,7 @@ function App() {
     }
 
     getSkillListData();
-  }, [currJobDetails])
+  }, [currRace, currCharClass, currJobDetails])
 
   const raceOptions = [
     {
@@ -140,165 +140,6 @@ function App() {
       title: "Rogue class",
       img: archerIcon,
       imgButton: true,
-    },
-  ];
-
-  const skillOptions = [
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
-    },
-    {
-      label: "Power Strike",
     },
   ];
 
@@ -361,7 +202,7 @@ function App() {
             onSelectJob={onSelectJob}
           />
         </div>
-        <SkillOptions skillOptions={skillOptions} />
+        <SkillOptions skillOptions={currSkillLists} />
         <SkillInfo />
       </div>
       <div className="sp-needed">

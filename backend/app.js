@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 
 import express from 'express';
 import pool from './db.js';
+import { json } from 'node:stream/consumers';
 
 const app = express();
 
@@ -74,12 +75,11 @@ app.post('/get-job-list', async(req, res) => {
   res.status(200).json({text: 'job-list', query: jobs.rows})
 });
 
-app.post('/get-skill-list', async(req, res) => {
-  const {charDetail} = req.body;
-
   const jobIds = Object.entries(charDetail)
     .filter(([key, value]) => key.startsWith('jobId') && value !== 'None')
     .map(([, value]) => value);
+
+  jobIds.push(baseJobId.rows[0]?.job_id);
 
   const skills = await pool.query(
     `

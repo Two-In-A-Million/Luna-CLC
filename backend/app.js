@@ -129,8 +129,8 @@ app.post('/get-skill-list', async(req, res) => {
             jl.job_id = ANY($1)
             AND jl.race = $2
         ORDER BY
-            jl.level,
             jl.race,
+            jl.level,
             s.skill_idx
       `,
       [jobIds, charDetail.race]

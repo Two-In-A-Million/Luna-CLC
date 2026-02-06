@@ -29,6 +29,10 @@ app.get('/get-all-skill', async(req, res) => {
 
 })
 
+/*
+---GET ALL JOB LIST---
+*/
+
 app.get('/get-all-job-list', async(req, res) => {
     const jobs = await pool.query("\
       SELECT\
@@ -45,6 +49,18 @@ app.get('/get-all-job-list', async(req, res) => {
 
     res.status(200).json({text: 'job-list', query: jobs})
 });
+
+/*
+---GET JOB LIST---
+
+request:
+{
+  "charDetail": {
+    "race": "Human",
+    "class": "Fighter"
+  }
+}
+*/
 
 app.post('/get-job-list', async(req, res) => {
   const {charDetail} = req.body;
@@ -75,6 +91,63 @@ app.post('/get-job-list', async(req, res) => {
   res.status(200).json({text: 'job-list', query: jobs.rows})
 });
 
+
+/*
+---GET SKILL LIST---
+
+request:
+{
+  "charDetail": {
+    "race": "Human",
+    "class": "Fighter",
+    "jobId20": "1111",
+    "jobId40": "1121"
+  }
+}
+*/
+
+app.post('/get-skill-list', async(req, res) => {
+  const {charDetail} = req.body;
+  const jobIds = Object.entries(charDetail)
+    .filter(([key, value]) => key.startsWith('jobId') && value !== 'None')
+    .map(([, value]) => value);
+
+  const skills = await pool.query(
+    `
+        SELECT
+            jl.job_name,
+            js.skill_id,
+            replace(s.skill_name, '^s', ' ') AS skill_name,
+            substr(js.skill_id::text, length(js.skill_id::text) - 1)::int as max_level,
+            substr(js.skill_id::text, 0, length(js.skill_id::text) - 1)::int as skill_id_trim
+        FROM job_list jl
+            JOIN job_skill js
+                ON jl.job_id = js.job_id
+            JOIN skills s
+                ON s.skill_idx = js.skill_id
+        WHERE
+            jl.job_id = ANY($1)
+            AND jl.race = $2
+        ORDER BY
+            jl.level,
+            jl.race,
+            s.skill_idx
+      `,
+      [jobIds, charDetail.race]
+    );
+
+  res.status(200).json({query: skills.rows})
+});
+
+/*
+---GET SKILL LIST DETAIL---
+
+request:
+ON PROGRESS
+*/
+
+app.post('/get-skill-list-detail', async(req, res) => {
+  const {charDetail} = req.body;
   const jobIds = Object.entries(charDetail)
     .filter(([key, value]) => key.startsWith('jobId') && value !== 'None')
     .map(([, value]) => value);
@@ -83,41 +156,41 @@ app.post('/get-job-list', async(req, res) => {
 
   const skills = await pool.query(
     `
-        SELECT\
-            jl.job_name,\
-            jl.race,\
-            js.skill_id,\
-            regexp_replace(s.skill_name, '\^s', ' ', 'g') AS skill_name,\
-            st.skill_tooltip,\
-            regexp_replace(sb1.skill_name, '\^s', ' ', 'g') AS buff1,\
-            regexp_replace(sb2.skill_name, '\^s', ' ', 'g') AS buff2,\
-            regexp_replace(sb3.skill_name, '\^s', ' ', 'g') AS buff3,\
-          regexp_replace(sb4.skill_name, '\^s', ' ', 'g') AS buff4,\
-            regexp_replace(sb5.skill_name, '\^s', ' ', 'g') AS buff5\
-        FROM job_list jl\
-          JOIN job_skill js\
-              ON jl.job_id = js.job_id\
-          JOIN skills s\
-              ON s.skill_idx = js.skill_id\
-          JOIN skill_tooltip st\
-              ON st.skill_idx = s.skill_idx\
-          LEFT JOIN skills_buff sb1\
-              ON s.buff_id_1 = sb1.skill_idx\
-          LEFT JOIN skills_buff sb2\
-              ON s.buff_id_2 = sb2.skill_idx\
-          LEFT JOIN skills_buff sb3\
-              ON s.buff_id_3 = sb3.skill_idx\
-          LEFT JOIN skills_buff sb4\
-              ON s.buff_id_4 = sb4.skill_idx\
-          LEFT JOIN skills_buff sb5\
-              ON s.buff_id_5 = sb5.skill_idx\
-        WHERE\
-          jl.job_id = ANY($1)\
-          AND jl.race = $2\
-        ORDER BY\
-            jl.level,\
-            jl.race,\
-            s.skill_idx\
+        SELECT
+            jl.job_name,
+            jl.race,
+            js.skill_id,
+            regexp_replace(s.skill_name, '\^s+', ' ', 'g') AS skill_name,
+            st.skill_tooltip,
+            regexp_replace(sb1.skill_name, '\^s', ' ', 'g') AS buff1,
+            regexp_replace(sb2.skill_name, '\^s', ' ', 'g') AS buff2,
+            regexp_replace(sb3.skill_name, '\^s', ' ', 'g') AS buff3,
+            regexp_replace(sb4.skill_name, '\^s', ' ', 'g') AS buff4,
+            regexp_replace(sb5.skill_name, '\^s', ' ', 'g') AS buff5
+        FROM job_list jl
+          JOIN job_skill js
+              ON jl.job_id = js.job_id
+          JOIN skills s
+              ON s.skill_idx = js.skill_id
+          JOIN skill_tooltip st
+              ON st.skill_idx = s.skill_idx
+          LEFT JOIN skills_buff sb1
+              ON s.buff_id_1 = sb1.skill_idx
+          LEFT JOIN skills_buff sb2
+              ON s.buff_id_2 = sb2.skill_idx
+          LEFT JOIN skills_buff sb3
+              ON s.buff_id_3 = sb3.skill_idx
+          LEFT JOIN skills_buff sb4
+              ON s.buff_id_4 = sb4.skill_idx
+          LEFT JOIN skills_buff sb5
+              ON s.buff_id_5 = sb5.skill_idx
+        WHERE
+          jl.job_id = ANY($1)
+          AND jl.race = $2
+        ORDER BY
+            jl.level,
+            jl.race,
+            s.skill_idx
       `,
       [jobIds, charDetail.race]
     );

@@ -139,41 +139,82 @@ app.post('/get-skill-list', async(req, res) => {
   res.status(200).json({query: skills.rows})
 });
 
+function parseSkillPayload(input) {
+  return {
+    query: input.map(row => {
+      const result = {
+        skill_name: row.skill_name,
+        skill_tooltip: row.skill_tooltip,
+        skill_point: row.skill_point,
+        skill_money: row.skill_money,
+        range: row.range,
+        equiptype: row.equiptype,
+        unitdata: row.unitdata
+      };
+
+      for (let i = 1; i <= 5; i++) {
+        result[`buff${i}`] = {
+          buffname: row[`buffname${i}`],
+          buffrate: row[`buffrate${i}`],
+          buffstatus: row[`buffstatus${i}`],
+          buffstatusdata: row[`buffstatusdata${i}`],
+          buffdelaytime: row[`buffdelaytime${i}`] ?? null
+        };
+      }
+
+      return result;
+    })
+  };
+}
+
 /*
 ---GET SKILL LIST DETAIL---
-
 request:
-ON PROGRESS
+{
+  "skill": {
+    "skillId": 2101201
+  }
+}
 */
 
 app.post('/get-skill-list-detail', async(req, res) => {
-  const {charDetail} = req.body;
-  const jobIds = Object.entries(charDetail)
-    .filter(([key, value]) => key.startsWith('jobId') && value !== 'None')
-    .map(([, value]) => value);
-
-  jobIds.push(baseJobId.rows[0]?.job_id);
+  const {skill} = req.body;
 
   const skills = await pool.query(
     `
         SELECT
-            jl.job_name,
-            jl.race,
-            js.skill_id,
             regexp_replace(s.skill_name, '\^s+', ' ', 'g') AS skill_name,
             st.skill_tooltip,
-            regexp_replace(sb1.skill_name, '\^s', ' ', 'g') AS buff1,
-            regexp_replace(sb2.skill_name, '\^s', ' ', 'g') AS buff2,
-            regexp_replace(sb3.skill_name, '\^s', ' ', 'g') AS buff3,
-            regexp_replace(sb4.skill_name, '\^s', ' ', 'g') AS buff4,
-            regexp_replace(sb5.skill_name, '\^s', ' ', 'g') AS buff5
-        FROM job_list jl
-          JOIN job_skill js
-              ON jl.job_id = js.job_id
-          JOIN skills s
-              ON s.skill_idx = js.skill_id
+            s.train_point as skill_point,
+            s.train_money as skill_money,
+            s.range as range,
+            s.equip as equiptype,
+            s.unit_data_type as unitdata,
+            regexp_replace(sb1.skill_name, '\^s', ' ', 'g') AS buffname1,
+            s.rate_buff_1 as buffrate1,
+            sb1.status as buffstatus1,
+            sb1.status_data_value as buffstatusdata1, 
+            sb1.delay_time as buffdelaytime1,
+            regexp_replace(sb2.skill_name, '\^s', ' ', 'g') AS buffname2,
+            s.rate_buff_2 as buffrate2,
+            sb2.status as buffstatus2,
+            sb2.status_data_value as buffstatusdata2, 
+            regexp_replace(sb3.skill_name, '\^s', ' ', 'g') AS buffname3,
+            s.rate_buff_3 as buffrate3,
+            sb3.status as buffstatus3,
+            sb3.status_data_value as buffstatusdata3, 
+            regexp_replace(sb4.skill_name, '\^s', ' ', 'g') AS buffname4,
+            s.rate_buff_4 as buffrate4,
+            sb4.status as buffstatus4,
+            sb4.status_data_value as buffstatusdata4, 
+            regexp_replace(sb5.skill_name, '\^s', ' ', 'g') AS buffname5,
+            s.rate_buff_5 as buffrate5,
+            sb5.status as buffstatus5,
+            sb5.status_data_value as buffstatusdata5
+        FROM 
+          skills s
           JOIN skill_tooltip st
-              ON st.skill_idx = s.skill_idx
+              ON st.skill_idx = s.skill_tooltip
           LEFT JOIN skills_buff sb1
               ON s.buff_id_1 = sb1.skill_idx
           LEFT JOIN skills_buff sb2
@@ -184,18 +225,15 @@ app.post('/get-skill-list-detail', async(req, res) => {
               ON s.buff_id_4 = sb4.skill_idx
           LEFT JOIN skills_buff sb5
               ON s.buff_id_5 = sb5.skill_idx
-        WHERE
-          jl.job_id = ANY($1)
-          AND jl.race = $2
+        where
+          s.skill_idx = $1
         ORDER BY
-            jl.level,
-            jl.race,
-            s.skill_idx
+          s.skill_idx
       `,
-      [jobIds, charDetail.race]
+      [skill.skillId]
     );
 
-  res.status(200).json({query: skills.rows})
+  res.status(200).json(parseSkillPayload(skills.rows));
 });
 
 // app.get('/places', async (req, res) => {

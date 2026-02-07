@@ -1,15 +1,32 @@
 import archerIcon from "../../assets/archery.png";
+import type skillListModel from "../../models/skillListModel";
 import ProgressBar from "../progress-bar/ProgressBar";
 import classes from "./SkillCard.module.css";
 
-export default function SkillCard({ skill }: { skill: any }) {
+export default function SkillCard({
+  skill,
+  skillLevels,
+}: {
+  skill: skillListModel;
+  skillLevels: Record<number, number>;
+}) {
 
   return (
-    <button className={classes.skillCard} title={skill.label}>
-      <div className={classes.imgContainer} title={skill.label}>
-        <img src={archerIcon} className="skill-icon" />
+    <button className={classes.skillCard} title={skill.skill_name} onClick={()=>console.log("awd")}>
+      <div className={classes.imgContainer}>
+        <img
+          src={`../../assets/${skill.skill_name}.png`}
+          onError={(e) => {
+            e.currentTarget.src = archerIcon;
+          }}
+          className="skill-icon"
+        />
       </div>
-      <ProgressBar value={1} maxValue={5} />
+      <ProgressBar
+        value={skillLevels[skill.skill_id_trim] ?? 0}
+        maxValue={skill.max_level}
+        skillId={skill.skill_id_trim}
+      />
     </button>
   );
 }

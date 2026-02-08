@@ -1,2 +1,3 @@
 Postgres/
 frontend/src/assets/data/
+.env

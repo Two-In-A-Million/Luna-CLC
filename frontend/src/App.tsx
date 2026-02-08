@@ -3,14 +3,27 @@ import "./App.css";
 import { CharacterProvider } from "./store/char-context";
 import SkillsProvider from "./store/skills-context";
 import MainSection from "./components/main-section/MainSection";
+import AdminMenu from "./components/admin-menu/AdminMenu";
+import { useSecretCommands } from "./hooks/useSecretCommands";
 
 function App() {
- const [isAdmin, setIsAdmin] = useState(1);
+  const [showAdmin, setShowAdmin] = useState(false);
+
+  // LOG HERE: This will run every time the component re-renders
+  console.log("RENDER - Admin Visibility is currently:", showAdmin);
+
+  useSecretCommands(["shift", "a", "d", "m"], () => {
+    setShowAdmin((v) => !v);
+  });
 
   return (
     <CharacterProvider>
       <SkillsProvider>
-        {isAdmin && <MainSection/>}
+        {!showAdmin ? (
+            <MainSection />
+          ) : (
+            <AdminMenu onExit={() => setShowAdmin(false)} />
+          )}
       </SkillsProvider>
     </CharacterProvider>
   );

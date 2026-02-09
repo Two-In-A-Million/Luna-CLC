@@ -2,7 +2,7 @@ import mageIcon from "../../assets/mage.png";
 import warriorIcon from "../../assets/swords.png";
 import classes from './SkillMainInfo.module.css'
 
-export default function SkillMainInfo() {
+export default function SkillMainInfo({skillName} : {skillName: string | undefined}) {
   return (
     <div className={classes.mainInfoCard}>
       <div className={classes.mainInfo}>
@@ -12,7 +12,7 @@ export default function SkillMainInfo() {
           style={{ width: "4rem", height: "4rem" }}
         />
         <span>
-          <p className=""> Dildo Strike </p>
+          <p className="">{skillName}</p>
           <p className={classes.active}> Active Skill </p>
         </span>
       </div>

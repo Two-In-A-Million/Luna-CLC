@@ -3,27 +3,40 @@ import "./App.css";
 import { CharacterProvider } from "./store/char-context";
 import SkillsProvider from "./store/skills-context";
 import MainSection from "./components/main-section/MainSection";
+import AdminLogin from "./components/admin-login/AdminLogin";
 import AdminMenu from "./components/admin-menu/AdminMenu";
 import { useSecretCommands } from "./hooks/useSecretCommands";
 
 function App() {
-  const [showAdmin, setShowAdmin] = useState(false);
+  const [adminMode, setAdminMode] = useState(false);
+  const [adminToken, setAdminToken] = useState<string | null>(null);
 
-  // LOG HERE: This will run every time the component re-renders
-  console.log("RENDER - Admin Visibility is currently:", showAdmin);
 
   useSecretCommands(["shift", "a", "d", "m"], () => {
-    setShowAdmin((v) => !v);
+    setAdminMode(true);
   });
+
+  const handleLoginSuccess = (token: string) => {
+    setAdminToken(token);
+  };
+
+  const handleLogout = () => {
+    setAdminToken(null);
+    setAdminMode(false);
+  };
 
   return (
     <CharacterProvider>
       <SkillsProvider>
-        {!showAdmin ? (
-            <MainSection />
-          ) : (
-            <AdminMenu onExit={() => setShowAdmin(false)} />
-          )}
+       {!adminMode && <MainSection />}
+
+        {adminMode && !adminToken && (
+          <AdminLogin onLoginSuccess={handleLoginSuccess} />
+        )}
+
+        {adminMode && adminToken && (
+          <AdminMenu token={adminToken} onExit={handleLogout} />
+        )}
       </SkillsProvider>
     </CharacterProvider>
   );

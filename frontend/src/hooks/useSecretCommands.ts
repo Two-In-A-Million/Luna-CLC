@@ -36,7 +36,6 @@ export const useSecretCommands = (targetKeys: string[], callback: () => void) =>
     const allPressed = targetKeys.every((t) => pressedKeys.has(t.toLowerCase()));
 
     if (allPressed) {
-      console.log("SUCCESS: Calling toggle now!");
       callback();
       setPressedKeys(new Set()); 
     }

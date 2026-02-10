@@ -1,0 +1,35 @@
+.searchContainer {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.searchContainer input {
+  padding: 0.5rem 0.8rem;
+  font-family: "VT323", monospace;
+  background-color: #1a1a2e;
+  border: 1px solid #3a3a5c;
+  color: #eaf6ff;
+  font-size: 1.1rem;
+}
+
+.searchContainer input:focus {
+  outline: none;
+  border-color: #ffd700;
+}
+
+.searchContainer button {
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid #4a4a7c;
+  background-color: #3a3a5c;
+  color: white;
+  transition: 0.2s;
+}
+
+.searchContainer button:hover {
+  border-color: #ffd700;
+  background-color: #4a4a7c;
+}

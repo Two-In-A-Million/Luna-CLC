@@ -53,9 +53,24 @@ export async function getJobList(req, res) {
 export async function getSkillList(req, res) {
     const { charDetail } = req.body;
 
+    const baseJobId = await pool.query("\
+      SELECT\
+        jl.job_id\
+      FROM\
+        job_list jl\
+      WHERE\
+        jl.race != 'Devil'\
+        AND jl.level != 145 \
+        AND jl.level = 0\
+        AND jl.race = '"+charDetail.race+"'\
+        AND jl.job_name = '"+charDetail.class+"'\
+    ");
+
     const jobIds = Object.entries(charDetail)
     .filter(([key, value]) => key.startsWith("jobId") && value !== "None")
     .map(([, value]) => value);
+
+    jobIds.push(baseJobId.rows[0]?.job_id);
 
     const result = await pool.query(`
     SELECT
@@ -92,6 +107,10 @@ export async function getSkillDetail(req, res) {
         s.unit_data_type as unitdata,
         s.animation_time,
         s.casting_time,
+        s.area_data,
+        s.skill_effect,
+        s.mana,
+        s.target,
         s.cool_time as cooldown,
         replace(sb1.skill_name, '^s', ' ') AS buffname1,
         s.rate_buff_1 as buffrate1,

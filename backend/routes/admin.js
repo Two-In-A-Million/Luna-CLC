@@ -22,6 +22,11 @@ import {
   updateJob
 } from "../controllers/admin/JobController.js";
 
+import {
+  getAllStatusEffect,
+  updateStatusEffect
+} from "../controllers/admin/StatusController.js";
+
 const router = express.Router();
 
 router.use(requireAdmin);
@@ -43,5 +48,9 @@ router.put("/skills-tooltip/:id", updateTooltip);
 //JOBS
 router.get("/jobs/", getAllJobs);
 router.put("/jobs/:id", updateJob);
+
+//STATUS EFFECT
+router.get("/status-effect/", getAllStatusEffect);
+router.put("/status-effect/:id", updateStatusEffect);
 
 export default router;

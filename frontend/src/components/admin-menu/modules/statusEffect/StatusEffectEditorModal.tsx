@@ -27,8 +27,8 @@ const StatusEffectEditorModal: React.FC<Props> = ({ statusEffect, onClose, onSav
             <label>Status Effect</label>
             <input
               type="string"
-              value={formData.status_id}
-              onChange={(e) => updateField("status_id", String(e.target.value))}
+              value={formData.status_name}
+              onChange={(e) => updateField("status_name", String(e.target.value))}
             />
           </div>
         </div>

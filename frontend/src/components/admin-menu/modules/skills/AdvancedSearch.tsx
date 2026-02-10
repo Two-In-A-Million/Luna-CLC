@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "../../../AdvancedSearch.module.css";
+import styles from "../../AdvancedSearch.module.css";
 
 
 interface Props {

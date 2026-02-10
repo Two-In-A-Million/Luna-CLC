@@ -10,7 +10,9 @@ class skillDetailModel {
   unitdata: string;
   animation_time: number;
   casting_time: number;
-  cooldown: number;
+  cooldown: string;
+  mana: string;
+  target: string;
   buff1: SkillBuff[];
   buff2: SkillBuff[];
   buff3: SkillBuff[];
@@ -27,7 +29,9 @@ class skillDetailModel {
     unitdata: string,
     animation_time: number,
     casting_time: number,
-    cooldown: number,
+    cooldown: string,
+    mana: string,
+    target: string,
     buff1: SkillBuff[],
     buff2: SkillBuff[],
     buff3: SkillBuff[],
@@ -44,6 +48,8 @@ class skillDetailModel {
     this.animation_time = animation_time;
     this.casting_time = casting_time;
     this.cooldown = cooldown;
+    this.mana = mana;
+    this.target = target;
     this.buff1 = buff1;
     this.buff2 = buff2;
     this.buff3 = buff3;

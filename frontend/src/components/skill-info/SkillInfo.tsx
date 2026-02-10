@@ -6,14 +6,25 @@ import SkillMoreInfo from "./SkillMoreInfo";
 export default function SkillInfo() {
   const {currSelectedSkill} = useSkillCtx();
 
+  let skillDetail = 
+  <>
+    SP : {currSelectedSkill?.skill_point}
+    <br />
+    Gold : {currSelectedSkill?.skill_money}
+    <br />
+    Target : {currSelectedSkill?.target}
+  </>
+
   return (
     <div className={classes.skillInfo}>
       <h2> Skill Information </h2>
-      <div className={classes.skillDesc}>
-        <SkillMainInfo skillName={currSelectedSkill?.skill_name}/>
-        <SkillMoreInfo title="Skill Description" text={currSelectedSkill?.skill_tooltip}/>
-        <SkillMoreInfo title="Skill Efects" text="mual"/>
-      </div>
+      {
+        currSelectedSkill && <div className={classes.skillDesc}>
+          <SkillMainInfo skillName={currSelectedSkill.skill_name} skillCD={currSelectedSkill.cooldown} skillMana={currSelectedSkill.mana} equipType={currSelectedSkill.equiptype}/>
+          <SkillMoreInfo title="Skill Description" text={currSelectedSkill.skill_tooltip}/>
+          <SkillMoreInfo title="Skill Detail" text={skillDetail}/>
+        </div>
+      }
     </div>
   );
 }

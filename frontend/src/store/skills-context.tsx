@@ -8,7 +8,6 @@ import {
 import skillListModel from "../models/skillListModel";
 import type skillReqDetail from "../models/skillReqDetail";
 import { useCharacterCtx } from "./char-context";
-import SkillBuff from "../models/skillBuff";
 import skillDetailModel from "../models/skillDetail";
 
 interface SkillContextValue {
@@ -65,7 +64,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
         };
       });
 
-      let getSkillList = await fetch("http://localhost:3000/get-skill-list", {
+      let getSkillList = await fetch("http://localhost:3000/api/get-skill-list", {
         method: "POST",
         body: JSON.stringify({ charDetail: charDetail }),
         headers: {
@@ -108,7 +107,6 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
     command: string;
     max_level: number;
   }) => {
-    console.log("skill lvl");
     if (currSkillLevels[skill_id]) {
       if (command == "add") {
         setSkillLevels((prev) => ({
@@ -172,7 +170,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
     };
 
     let getSkillDetail = await fetch(
-      "http://localhost:3000/get-skill-list-detail",
+      "http://localhost:3000/api/get-skill-list-detail",
       {
         method: "POST",
         body: JSON.stringify({ skill: skill }),

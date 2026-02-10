@@ -100,7 +100,6 @@ function App() {
       });
       let skillList = await getSkillList.json();
 
-      console.log(skillList);
       setSkillLists(skillList.query);
     }
 

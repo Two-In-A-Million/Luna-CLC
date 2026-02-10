@@ -17,23 +17,24 @@
 
 .mainInfo p {
   margin: 0;
+  text-align: center;
 }
 
 .skillStats {
   margin-top: 0.4rem;
-  display: grid;
-  grid-template-columns: repeat(3, auto);
+  display: flex;
   gap: 0.3rem;
+  justify-content: space-around;
   align-items: center;
 }
 
 .skillStats div {
+  width: 45%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0.4rem;
-  gap: 0.3rem;
   border: 2px solid #4a4a7c;
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.1),
@@ -42,6 +43,7 @@
 
 .skillStats p{
     margin: 0.2rem;
+    font-size: small;
 }
 
 .active {
@@ -50,4 +52,9 @@
 
 .passive {
   color: #00d9ff;
+}
+
+.skillEquip{
+  text-align: center;
+  margin-bottom: 0;
 }

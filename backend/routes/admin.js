@@ -9,7 +9,8 @@ import {
 } from "../controllers/admin/SkillController.js";
 
 import {
-  getAllSkillBuff
+  getAllSkillBuff,
+  updateSkillBuff
 } from "../controllers/admin/SkillBuffController.js";
 
 import {
@@ -27,6 +28,11 @@ import {
   updateStatusEffect
 } from "../controllers/admin/StatusController.js";
 
+import {
+  getAllJobSkills,
+  updateJobSkill
+} from "../controllers/admin/JobSKillController.js";
+
 const router = express.Router();
 
 router.use(requireAdmin);
@@ -40,6 +46,8 @@ router.delete("/skills/:id", deleteSkill);
 
 //SKILLS BUFF
 router.get("/skills-buff/", getAllSkillBuff);
+router.put("/skills-buff/:id", updateSkillBuff);
+
 
 //SKILLS TOOLTIP
 router.get("/skills-tooltip/", getAllSkillTooptip);
@@ -48,6 +56,10 @@ router.put("/skills-tooltip/:id", updateTooltip);
 //JOBS
 router.get("/jobs/", getAllJobs);
 router.put("/jobs/:id", updateJob);
+
+//JOBS SKILL
+router.get("/job-skills/", getAllJobSkills);
+router.put("/jobs/:id", updateJobSkill);
 
 //STATUS EFFECT
 router.get("/status-effect/", getAllStatusEffect);

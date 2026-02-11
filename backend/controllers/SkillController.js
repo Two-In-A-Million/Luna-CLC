@@ -114,14 +114,53 @@ export async function getSkillDetail(req, res) {
         s.cool_time as cooldown,
         replace(sb1.skill_name, '^s', ' ') AS buffname1,
         s.rate_buff_1 as buffrate1,
-        sb1.status_data_value as buffstatusdata1,
+        sb1.status_data_value as buffstatusdata1, 
         sb1.delay_time as buffdelaytime1,
-        se1.status_name as buffstatus1
+        se1.status_name as buffstatus1,
+        replace(sb2.skill_name, '^s', ' ') AS buffname2,
+        s.rate_buff_2 as buffrate2,
+        sb2.status_data_value as buffstatusdata2,
+        sb2.delay_time as buffdelaytime2,
+        se2.status_name as buffstatus2,
+        replace(sb3.skill_name, '^s', ' ') AS buffname3,
+        s.rate_buff_3 as buffrate3,
+        sb3.status_data_value as buffstatusdata3,
+        sb3.delay_time as buffdelaytime3,
+        se3.status_name as buffstatus3,
+        replace(sb4.skill_name, '^s', ' ') AS buffname4,
+        s.rate_buff_4 as buffrate4,
+        sb4.status_data_value as buffstatusdata4,
+        sb4.delay_time as buffdelaytime4, 
+        se4.status_name as buffstatus4,
+        replace(sb5.skill_name, '^s', ' ') AS buffname5,
+        s.rate_buff_5 as buffrate5,
+        sb5.status_data_value as buffstatusdata5,
+        sb5.delay_time as buffdelaytime5,
+        se5.status_name as buffstatus5
     FROM 
         skills s
-        JOIN skill_tooltip st ON st.skill_idx = s.skill_tooltip
-        LEFT JOIN skills_buff sb1 ON s.buff_id_1 = sb1.skill_idx
-        LEFT JOIN status_effect se1 ON sb1.status = se1.status_id
+        JOIN skill_tooltip st 
+            ON st.skill_idx = s.skill_tooltip
+        LEFT JOIN skills_buff sb1 
+            ON s.buff_id_1 = sb1.skill_idx
+        LEFT JOIN status_effect se1 
+            ON sb1.status = se1.status_id
+        LEFT JOIN skills_buff sb2
+            ON s.buff_id_2 = sb2.skill_idx
+        LEFT JOIN status_effect se2
+            ON sb2.status = se2.status_id
+        LEFT JOIN skills_buff sb3
+            ON s.buff_id_3 = sb3.skill_idx
+        LEFT JOIN status_effect se3
+            ON sb3.status = se3.status_id
+        LEFT JOIN skills_buff sb4
+            ON s.buff_id_4 = sb4.skill_idx
+        LEFT JOIN status_effect se4
+            ON sb4.status = se4.status_id
+        LEFT JOIN skills_buff sb5
+            ON s.buff_id_5 = sb5.skill_idx
+        LEFT JOIN status_effect se5
+            ON sb5.status = se5.status_id
     WHERE 
         s.skill_idx = $1
   `, [skill.skillId]);

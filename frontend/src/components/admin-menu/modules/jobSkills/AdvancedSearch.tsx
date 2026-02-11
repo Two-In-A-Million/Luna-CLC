@@ -2,42 +2,42 @@ import { useState, useEffect } from "react";
 import styles from "../../AdvancedSearch.module.css";
 
 interface Props {
-  statusEffects: any[];
+  skillBuffs: any[];
   onFilter: (filtered: any[]) => void;
 }
 
-const AdvancedSearch: React.FC<Props> = ({ statusEffects, onFilter }) => {
+const AdvancedSearch: React.FC<Props> = ({ skillBuffs, onFilter }) => {
   const [searchId, setSearchId] = useState("");
   const [searchTooltip, setSearchTooltip] = useState("");
 
   useEffect(() => {
-    let filtered = [...statusEffects];
+    let filtered = [...skillBuffs];
 
     if (searchId) {
       filtered = filtered.filter((s) =>
-        String(s.status_id).includes(searchId)
+        String(s.job_id).includes(searchId)
       );
     }
 
     if (searchTooltip) {
       filtered = filtered.filter((s) =>
-        s.status_name.toLowerCase().includes(searchTooltip.toLowerCase())
+        s.job_name.toLowerCase().includes(searchTooltip.toLowerCase())
       );
     }
 
     onFilter(filtered);
-  }, [searchId, searchTooltip, statusEffects]);
+  }, [searchId, searchTooltip, skillBuffs]);
 
   return (
     <div className={styles.searchContainer}>
       <input
-        placeholder="Search Status ID"
+        placeholder="Search Skill ID"
         value={searchId}
         onChange={(e) => setSearchId(e.target.value)}
       />
 
       <input
-        placeholder="Search Status Name"
+        placeholder="Search Tooltip"
         value={searchTooltip}
         onChange={(e) => setSearchTooltip(e.target.value)}
       />

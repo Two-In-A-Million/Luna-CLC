@@ -16,12 +16,12 @@ const StatusEffectPage = () => {
       try {
         setLoading(true);
 
-        const [statusEffect] = await Promise.all([
+        const [statusEffectData] = await Promise.all([
           apiFetch("/status-effect"),
         ]);
 
-        setStatusEffect(statusEffect);
-        setFilteredStatusEffect(statusEffect);
+        setStatusEffect(statusEffectData);
+        setFilteredStatusEffect(statusEffectData);
       } catch (err) {
         console.error(err);
       } finally {
@@ -32,8 +32,8 @@ const StatusEffectPage = () => {
     loadData();
   }, []);
 
-  const handleEdit = (tooltip: any) => {
-    setSelectedStatusEffect(tooltip);
+  const handleEdit = (statusEffect: any) => {
+    setSelectedStatusEffect(statusEffect);
   };
 
   const handleClose = () => {

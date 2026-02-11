@@ -3,7 +3,7 @@ import styles from '../../Table.module.css';
 
 interface Props {
   statusEffects: any[];
-  onEdit: (job: any) => void;
+  onEdit: (statusEffect: any) => void;
 }
 
 const ITEMS_PER_PAGE = 10;
@@ -20,7 +20,7 @@ const StatusEffectTable: React.FC<Props> = ({ statusEffects, onEdit }) => {
 
   return (
     <div className={styles.Container}>
-      <h1 className={styles.title}>Tooltip</h1>
+      <h1 className={styles.title}>Status Effect</h1>
       <div className={styles.tableWrapper}>
         <table className={styles.Table}>
           <thead>

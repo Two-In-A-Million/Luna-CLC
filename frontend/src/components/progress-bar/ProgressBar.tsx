@@ -1,10 +1,9 @@
-import { useSkillCtx } from "../../store/skills-context";
+import { useSkillCtx } from "../../store/skills-provider";
 import classes from "./ProgressBar.module.css";
 export default function ProgressBar({
   value,
   maxValue,
-  skillId,
-  skillIdFull
+  skillId
 }: {
   value: number;
   maxValue: number;
@@ -26,7 +25,6 @@ export default function ProgressBar({
             e.stopPropagation();
             
             const changed = updateSkillLevel({skill_id: skillId, command: 'minus', max_level: maxValue});
-            
             if (changed === 'minus') {
               await updateSpDetail(skillId, changed);
             }

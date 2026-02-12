@@ -1,20 +1,16 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import skillListModel from "../models/skillListModel";
-import type skillReqDetail from "../models/skillReqDetail";
+import skillReqDetail from "../models/skillReqDetail";
 import { useCharacterCtx } from "./char-context";
 import skillDetailModel from "../models/skillDetail";
+import { SkillsContext } from "./skills-context";
 
-interface SkillContextValue {
+export interface SkillContextValue {
   currSkillLists?: skillListModel[];
   currSkillLevels: Record<number, number>;
   currSkillReqDetail: skillReqDetail;
   currSelectedSkill: skillDetailModel | undefined;
+  isLoading: boolean;
   updateSkillLevel: ({
     skill_id,
     command,
@@ -28,10 +24,6 @@ interface SkillContextValue {
   updateSpDetail: (skillId: number, changed: string) => Promise<void>;
   setSelectedSkillId: (skill_id: number | undefined) => void;
 }
-
-export const SkillsContext = createContext<SkillContextValue | undefined>(
-  undefined,
-);
 
 export default function SkillsProvider({ children }: { children: ReactNode }) {
   const { currRace, currCharClass, currJobDetails } = useCharacterCtx();
@@ -48,9 +40,21 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
   const [currSelectedSkill, setSelectedSkill] = useState<skillDetailModel>();
   const [selectedSkillId, setSelectedSkillId] = useState<number>();
 
+  const [isLoading, setLoading] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  const prevSkillLevelRef = useRef<Record<number, number>>({});
+
+  function sleep(milliseconds: number) {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  }
+
   useEffect(() => {
     // get skill list
     async function getSkillListData() {
+      if (firstLoad) {
+        setLoading(true);
+      }
       let charDetail = {
         race: currRace,
         class: currCharClass,
@@ -64,14 +68,21 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
         };
       });
 
-      let getSkillList = await fetch("http://localhost:3000/api/get-skill-list", {
-        method: "POST",
-        body: JSON.stringify({ charDetail: charDetail }),
-        headers: {
-          "Content-Type": "application/json",
+      let getSkillList = await fetch(
+        "http://localhost:3000/api/get-skill-list",
+        {
+          method: "POST",
+          body: JSON.stringify({ charDetail: charDetail }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
       let skillList = await getSkillList.json();
+
+      if (firstLoad) {
+        await sleep(2500);
+      }
 
       setSkillLists(skillList.query);
 
@@ -82,6 +93,11 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
         total_gold: 0,
         sp_remain: 3074,
       });
+
+      if (firstLoad) {
+        setLoading(false);
+        setFirstLoad(false);
+      }
     }
 
     getSkillListData();
@@ -89,14 +105,33 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!selectedSkillId) {
+      setSelectedSkill(undefined);
       return;
     }
+
     let curId = parseInt(
       selectedSkillId.toString() +
-        (currSkillLevels[selectedSkillId] ?? 1).toString().padEnd(2, "0"),
+        (currSkillLevels[selectedSkillId]
+          ? currSkillLevels[selectedSkillId] == 0
+            ? 1
+            : currSkillLevels[selectedSkillId]
+          : 1
+        )
+          .toString()
+          .padStart(2, "0"),
     );
+
     fetchSkillDetail({ skill_id: curId });
   }, [selectedSkillId]);
+
+  useEffect(() => {
+    prevSkillLevelRef.current = currSkillLevels;
+  }, [currSkillReqDetail]);
+
+  useEffect(() => {
+    setSelectedSkillId(undefined);
+    setSelectedSkill(undefined);
+  }, [currRace, currCharClass]);
 
   const updateSkillLevel = ({
     skill_id,
@@ -114,12 +149,20 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
           [skill_id]: Math.min(max_level, (prev[skill_id] ?? 0) + 1),
         }));
 
+        if (max_level < (currSkillLevels[skill_id] ?? 0) + 1) {
+          return "unchanged";
+        }
+
         return "plus";
       } else {
         setSkillLevels((prev) => ({
           ...prev,
           [skill_id]: Math.max(0, (prev[skill_id] ?? 0) - 1),
         }));
+
+        if (0 > (currSkillLevels[skill_id] ?? 0) - 1) {
+          return "unchanged";
+        }
 
         return "minus";
       }
@@ -139,24 +182,38 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    let curLevel = currSkillLevels[skillId] ?? 1;
+    let curLevel = 0;
+
+    if (changed === "minus") {
+      curLevel = currSkillLevels[skillId] ?? 1;
+    } else if (changed === "plus") {
+      curLevel = currSkillLevels[skillId] ? currSkillLevels[skillId] + 1 : 1;
+    }
+
     let curId = parseInt(
-      skillId.toString() + curLevel.toString().padEnd(2, "0"),
+      skillId.toString() + curLevel.toString().padStart(2, "0"),
     );
 
     const skillDetail = await fetchSkillDetail({ skill_id: curId });
 
     if (skillDetail?.skill_point) {
       const sp =
-      changed === "minus"
-        ? -skillDetail.skill_point
-        : skillDetail.skill_point;
+        changed === "minus"
+          ? -skillDetail.skill_point
+          : skillDetail.skill_point;
 
-      setSkillReqDetail((prev) => ({
-        ...prev,
-        ["total_sp"]: prev.total_sp + sp,
-        ["sp_remain"]: prev.sp_remain - sp,
-      }));
+      const validate = currSkillReqDetail.sp_remain;
+
+      if (validate - sp < 0) {
+        setSkillLevels(prevSkillLevelRef.current);
+        alert("Sorry, not enough sp for the next level!");
+      } else {
+        setSkillReqDetail((prev) => ({
+          ...prev,
+          ["total_sp"]: prev.total_sp + sp,
+          ["sp_remain"]: prev.sp_remain - sp,
+        }));
+      }
     }
   };
 
@@ -181,7 +238,6 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
     );
     let skillDetailRaw = await getSkillDetail.json();
     let skillDetail = skillDetailRaw.query[0];
-
     setSelectedSkill(skillDetail);
     return skillDetail;
   };
@@ -193,6 +249,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
         currSkillLevels,
         currSkillReqDetail,
         currSelectedSkill,
+        isLoading,
         updateSkillLevel,
         onClickSkill,
         updateSpDetail,

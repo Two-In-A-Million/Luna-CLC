@@ -1,4 +1,4 @@
-import { useSkillCtx } from "../../store/skills-context";
+import { useSkillCtx } from "../../store/skills-provider";
 import classes from "./SkillInfo.module.css";
 import SkillMainInfo from "./SkillMainInfo";
 import SkillMoreInfo from "./SkillMoreInfo";

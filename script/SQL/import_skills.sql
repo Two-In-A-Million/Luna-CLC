@@ -64,7 +64,7 @@ TRUNCATE TABLE skills RESTART IDENTITY;
 -- 3. Import fresh data
 COPY skills (
     skill_idx,
-    skill_name,
+    replace(skill_name,'^s', ' '),
     skill_level,
     skill_2d_image,
     skill_tooltip,

@@ -1,0 +1,123 @@
+.loadingWrapper {
+  inset: 0;
+  background: rgba(26, 26, 46, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  height: 100dvh;
+}
+
+
+.panel {
+  background: #252547;
+  border: 3px solid #4a4a7c;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    4px 4px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+
+  width: 320px;
+  text-align: center;
+  padding: 24px 16px 32px;
+  animation: panel-pop 0.2s ease-out;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.3),
+    transparent
+  );
+}
+
+.retroLoadingDiv {
+  margin-top: 24px;
+  font-size: 32px;
+  letter-spacing: 4px;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  background: linear-gradient(180deg, #ffd700, 0%, #b8860b 100%);
+  color: #eaf6ff;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 6px 16px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* Huruf lompat */
+.loadingLetter {
+  display: inline-block;
+  animation: bounce-letter 0.8s infinite ease-in-out;
+}
+
+/* Animasi bounce */
+@keyframes bounce-letter {
+  0%,
+  100% {
+    transform: translateY(0px);
+    color: #ffd700;
+  }
+  50% {
+    transform: translateY(-8px);
+    color: #00d9ff;
+  }
+}
+
+/* Panel masuk dikit biar retro */
+@keyframes panel-pop {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeInOverlay 0.2s ease-out forwards;
+}
+
+.fadeOut {
+  animation: fadeOutOverlay 0.3s ease-in forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(2px);
+  }
+}
+
+@keyframes fadeOutOverlay {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+

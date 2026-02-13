@@ -39,3 +39,10 @@
   }
 
 }
+
+@media screen and (max-height: 700px) {
+  .skillInfo {
+    height: fit-content;
+  }
+
+}

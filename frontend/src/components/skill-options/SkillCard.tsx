@@ -1,6 +1,6 @@
 import archerIcon from "../../assets/archery.png";
 import type skillListModel from "../../models/skillListModel";
-import { useSkillCtx } from "../../store/skills-context";
+import { useSkillCtx } from "../../store/skills-provider";
 import ProgressBar from "../progress-bar/ProgressBar";
 import classes from "./SkillCard.module.css";
 

@@ -1,8 +1,15 @@
 import { useState } from "react";
 import styles from "./AdminMenu.module.css";
+import SkillsPage from "./modules/skills/SkillsPage";
+import JobsPage from "./modules/jobs/JobsPage";
+import TooltipsPage from "./modules/tooltip/TooltipsPage";
+import StatusEffectPage from "./modules/statusEffect/StatusEffectPage";
+import SkillBuffPage from "./modules/skillBuff/SkillBuffPage";
+// import JobSkills from "./modules/JobSkills";
 
 interface AdminMenuProps {
   onExit: () => void;
+  token: string;
 }
 
 const AdminMenu: React.FC<AdminMenuProps> = ({ onExit }) => {
@@ -17,11 +24,20 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ onExit }) => {
         <nav className={styles.sidebarNav}>
           <button
             className={`${styles.navButton} ${
-              activeTab === "dashboard" ? styles.active : ""
+              activeTab === "jobs" ? styles.active : ""
             }`}
-            onClick={() => setActiveTab("dashboard")}
+            onClick={() => setActiveTab("jobs")}
           >
-            Dashboard
+            Job List
+          </button>
+
+          <button
+            className={`${styles.navButton} ${
+              activeTab === "jobSkills" ? styles.active : ""
+            }`}
+            onClick={() => setActiveTab("jobSkills")}
+          >
+            Job Skill
           </button>
 
           <button
@@ -30,16 +46,34 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ onExit }) => {
             }`}
             onClick={() => setActiveTab("skills")}
           >
-            Skill Editor
+            Skills
           </button>
 
           <button
             className={`${styles.navButton} ${
-              activeTab === "stats" ? styles.active : ""
+              activeTab === "skillBuff" ? styles.active : ""
             }`}
-            onClick={() => setActiveTab("stats")}
+            onClick={() => setActiveTab("skillBuff")}
           >
-            Character Stats
+            Skill Buff
+          </button>
+
+          <button
+            className={`${styles.navButton} ${
+              activeTab === "statusEffect" ? styles.active : ""
+            }`}
+            onClick={() => setActiveTab("statusEffect")}
+          >
+            Status Effect
+          </button>
+
+          <button
+            className={`${styles.navButton} ${
+              activeTab === "tooltip" ? styles.active : ""
+            }`}
+            onClick={() => setActiveTab("tooltip")}
+          >
+            Tooltip
           </button>
         </nav>
 
@@ -50,39 +84,12 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ onExit }) => {
 
       {/* MAIN CONTENT */}
       <main className={styles.adminMain}>
-        {activeTab === "dashboard" && (
-          <div className={styles.adminView}>
-            <h1>Dashboard</h1>
-            <p>
-              Welcome to the system backend. Select a category from the sidebar
-              to begin.
-            </p>
-          </div>
-        )}
-
-        {activeTab === "skills" && (
-          <div className={styles.adminView}>
-            <h1>Skill Editor</h1>
-            <div className={styles.adminActions}>
-              <button className={styles.retroBtn}>Reset All SP</button>
-              <button className={styles.retroBtn}>
-                Unlock All Skill Tiers
-              </button>
-            </div>
-          </div>
-        )}
-
-        {activeTab === "stats" && (
-          <div className={styles.adminView}>
-            <h1>Character Stats</h1>
-            <div className={styles.adminActions}>
-              <button className={styles.retroBtn}>Set Max Level</button>
-              <button className={styles.retroBtn}>
-                Add 1,000,000 Gold
-              </button>
-            </div>
-          </div>
-        )}
+        {activeTab === "jobs" && <JobsPage />}
+        {/* {activeTab === "jobSkills" && <JobSkills />} */}
+        {activeTab === "skills" && <SkillsPage />}
+        {activeTab === "skillBuff" && <SkillBuffPage />}
+        {activeTab === "statusEffect" && <StatusEffectPage />}
+        {activeTab === "tooltip" && <TooltipsPage />}
       </main>
     </div>
   );

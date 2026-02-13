@@ -21,7 +21,13 @@ interface CharacterContextValue {
   currJobLists: jobListModel[] | null;
   onChangeRace: (race: string) => void;
   onChangeClass: (charClass: string) => void;
-  onSelectJob: ({levelCap, value} : {levelCap: number; value: number}) => void;
+  onSelectJob: ({
+    levelCap,
+    value,
+  }: {
+    levelCap: number;
+    value: number;
+  }) => void;
 }
 
 const CharacterContext = createContext<CharacterContextValue | undefined>(
@@ -55,7 +61,9 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
     async function fetchJobList() {
       const res = await fetch("http://localhost:3000/api/get-job-list", {
         method: "POST",
-        body: JSON.stringify({ charDetail: { race: currRace, class: currCharClass } }),
+        body: JSON.stringify({
+          charDetail: { race: currRace, class: currCharClass },
+        }),
         headers: { "Content-Type": "application/json" },
       });
 
@@ -64,6 +72,12 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
     }
 
     fetchJobList();
+    setJobDetails([
+      { sectionName: "level 20", levelCap: 20, selected: 0 },
+      { sectionName: "level 40", levelCap: 40, selected: 0 },
+      { sectionName: "level 75", levelCap: 75, selected: 0 },
+      { sectionName: "level 105", levelCap: 105, selected: 0 },
+    ]);
   }, [currRace, currCharClass]);
 
   const onChangeRace = (race: string) => {
@@ -74,7 +88,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
         return prevRace;
       }
     });
-  }
+  };
 
   const onChangeClass = (charClass: string) => {
     setCharClass((prevCharClass) => {
@@ -84,17 +98,23 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
         return prevCharClass;
       }
     });
-  }
+  };
 
-  const onSelectJob = ({levelCap, value} : {levelCap: number; value: number}) => {
-    setJobDetails((prevDetails) => 
-      prevDetails.map((prevDetail) => 
+  const onSelectJob = ({
+    levelCap,
+    value,
+  }: {
+    levelCap: number;
+    value: number;
+  }) => {
+    setJobDetails((prevDetails) =>
+      prevDetails.map((prevDetail) =>
         prevDetail.levelCap === levelCap
           ? { ...prevDetail, selected: value }
-          : prevDetail
-      )
+          : prevDetail,
+      ),
     );
-  }
+  };
 
   return (
     <CharacterContext.Provider
@@ -117,9 +137,7 @@ export const useCharacterCtx = (): CharacterContextValue => {
   const ctx = useContext(CharacterContext);
 
   if (!ctx) {
-    throw new Error(
-      "useCharacterCtx must be used within a CharacterProvider"
-    );
+    throw new Error("useCharacterCtx must be used within a CharacterProvider");
   }
 
   return ctx;

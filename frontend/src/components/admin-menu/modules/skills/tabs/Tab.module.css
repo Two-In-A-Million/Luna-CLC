@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.container h3 {
+  font-size: 1.3rem;
+  border-bottom: 1px solid #3a3a5c;
+  padding-bottom: 0.5rem;
+}
+
+.subHeader{
+  font-size: 1.3rem;
+  border-bottom: 1px solid #3a3a5c;
+  padding-bottom: 0.5rem;
+}
+
+/* Each Buff Row */
+
+.buffRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Select wrapper */
+.buffRow :global(.customSelect__control) {
+  min-height: 40px;
+}
+
+/* Rate input */
+
+.buffRow input {
+  width: 100%;
+  padding: 0.6rem;
+  font-family: "VT323", monospace;
+  background-color: #222244;
+  border: 1px solid #3a3a5c;
+  color: #eaf6ff;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.buffRow input:focus {
+  outline: none;
+  border-color: #ffd700;
+  background-color: #2a2a4a;
+}
+
+/* Optional: row divider */
+
+.buffRow:not(:last-child) {
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #2a2a4a;
+}

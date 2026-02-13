@@ -8,25 +8,25 @@ interface Props {
 
 const AdvancedSearch: React.FC<Props> = ({ skillBuffs, onFilter }) => {
   const [searchId, setSearchId] = useState("");
-  const [searchTooltip, setSearchTooltip] = useState("");
+  const [searchSkillName, setSearchSkillName] = useState("");
 
   useEffect(() => {
     let filtered = [...skillBuffs];
 
     if (searchId) {
       filtered = filtered.filter((s) =>
-        String(s.job_id).includes(searchId)
+        String(s.skill_id).includes(searchId)
       );
     }
 
-    if (searchTooltip) {
+    if (searchSkillName) {
       filtered = filtered.filter((s) =>
-        s.job_name.toLowerCase().includes(searchTooltip.toLowerCase())
+        s.skill_name.toLowerCase().includes(searchSkillName.toLowerCase())
       );
     }
 
     onFilter(filtered);
-  }, [searchId, searchTooltip, skillBuffs]);
+  }, [searchId, searchSkillName, skillBuffs]);
 
   return (
     <div className={styles.searchContainer}>
@@ -37,15 +37,15 @@ const AdvancedSearch: React.FC<Props> = ({ skillBuffs, onFilter }) => {
       />
 
       <input
-        placeholder="Search Tooltip"
-        value={searchTooltip}
-        onChange={(e) => setSearchTooltip(e.target.value)}
+        placeholder="Search Skill Name"
+        value={searchSkillName}
+        onChange={(e) => setSearchSkillName(e.target.value)}
       />
 
       <button
         onClick={() => {
           setSearchId("");
-          setSearchTooltip("");
+          setSearchSkillName("");
         }}
       >
         Reset

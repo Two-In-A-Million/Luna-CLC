@@ -5,7 +5,7 @@ import JobsPage from "./modules/jobs/JobsPage";
 import TooltipsPage from "./modules/tooltip/TooltipsPage";
 import StatusEffectPage from "./modules/statusEffect/StatusEffectPage";
 import SkillBuffPage from "./modules/skillBuff/SkillBuffPage";
-// import JobSkills from "./modules/JobSkills";
+import JobSkillsPage from "./modules/jobSkills/JobSkillsPage";
 
 interface AdminMenuProps {
   onExit: () => void;
@@ -85,7 +85,7 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ onExit }) => {
       {/* MAIN CONTENT */}
       <main className={styles.adminMain}>
         {activeTab === "jobs" && <JobsPage />}
-        {/* {activeTab === "jobSkills" && <JobSkills />} */}
+        {activeTab === "jobSkills" && <JobSkillsPage />}
         {activeTab === "skills" && <SkillsPage />}
         {activeTab === "skillBuff" && <SkillBuffPage />}
         {activeTab === "statusEffect" && <StatusEffectPage />}

@@ -1,4 +1,9 @@
+
+\echo '------------------------------------'
+\echo 'RUNNING SCRIPT FOR STATUS EFFECT'
+\echo '------------------------------------'
 BEGIN;
+DROP TABLE IF EXISTS status_effect;
 
 CREATE TABLE IF NOT EXISTS status_effect (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -17,6 +22,14 @@ COPY status_effect (
 FROM '/script/CSV/status_effect.csv'
 DELIMITER ','
 CSV;
+
+DO $$
+DECLARE
+    total_count INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO total_count FROM status_effect;
+    RAISE NOTICE 'Inserted % rows into status_effect', total_count;
+END $$;
 
 COMMIT;
 

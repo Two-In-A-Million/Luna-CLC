@@ -1,3 +1,7 @@
+\echo '------------------------------------'
+\echo 'RUNNING SCRIPT FOR JOB LIST'
+\echo '------------------------------------'
+
 BEGIN;
 DROP TABLE IF EXISTS job_list;
 
@@ -22,6 +26,15 @@ COPY job_list (
 FROM '/script/CSV/job_list.csv'
 DELIMITER ','
 CSV;
+
+-- simple count output
+DO $$
+DECLARE
+    total_count INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO total_count FROM job_list;
+    RAISE NOTICE 'Inserted % rows into job_list', total_count;
+END $$;
 
 COMMIT;
 

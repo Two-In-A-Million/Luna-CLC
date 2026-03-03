@@ -1,4 +1,8 @@
+\echo '------------------------------------'
+\echo 'RUNNING SCRIPT FOR JOB SKILL'
+\echo '------------------------------------'
 BEGIN;
+DROP TABLE IF EXISTS job_skill;
 
 CREATE TEMP TABLE job_skill_raw (
     job_id INTEGER,
@@ -42,5 +46,13 @@ SELECT job_id,
 FROM job_skill
 GROUP BY job_id, skill_count
 HAVING COUNT(*) <> skill_count;
+
+DO $$
+DECLARE
+    total_count INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO total_count FROM job_skill;
+    RAISE NOTICE 'Inserted % rows into job_skill', total_count;
+END $$;
 
 COMMIT;

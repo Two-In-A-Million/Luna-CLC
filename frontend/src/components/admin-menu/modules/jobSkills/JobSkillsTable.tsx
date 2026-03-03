@@ -1,50 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from '../../Table.module.css';
 
 interface Props {
-  skillBuffs: any[];
-  onEdit: (skillBuff: any) => void;
+  jobSkills: any[];
+  onEdit: (jobSkill: any) => void;
 }
 
 const ITEMS_PER_PAGE = 10;
 
-const SkillBuffTable: React.FC<Props> = ({ skillBuffs, onEdit }) => {
+const JobSkillTable: React.FC<Props> = ({ jobSkills, onEdit }) => {
     const [currentPage, setCurrentPage] = useState(1);
     
-    const totalPages = Math.ceil(skillBuffs.length / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(jobSkills.length / ITEMS_PER_PAGE);
 
-    const paginatedSkillBuff = skillBuffs.slice(
+    const paginatedJobSkills = jobSkills.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
       currentPage * ITEMS_PER_PAGE
     );
 
   return (
     <div className={styles.Container}>
-      <h1 className={styles.title}>Skill Buff</h1>
+      <h1 className={styles.title}>Job Skill</h1>
       <div className={styles.tableWrapper}>
         <table className={styles.Table}>
           <thead>
             <tr className={styles.tableColumn}>
-              <th>Status ID</th>
-              <th>Tooltip ID</th>
+              <th>Job Name</th>
               <th>Skill Name</th>
               <th>Status</th>
-              <th>Status Data</th>
-              <th>Delay Time</th>
-              <th>Actions</th>
+              <th>Race</th>
             </tr>
           </thead>
             <tbody>
-              {paginatedSkillBuff.map((skillBuff) => (
-                <tr key={skillBuff.skill_idx} className={styles.tableColumn}>
-                  <td>{skillBuff.skill_idx}</td>
-                  <td>{skillBuff.skill_tooltip}</td>
-                  <td>{skillBuff.skill_name}</td>
-                  <td>{skillBuff.status_name}</td>
-                  <td>{skillBuff.status_data_value}</td>
-                  <td>{skillBuff.delay_time}</td>
+              {paginatedJobSkills.map((jobSkill) => (
+                <tr key={`${jobSkill.job_id}-${jobSkill.skill_id}`} className={styles.tableColumn}>
+                  <td>{jobSkill.job_name}</td>
+                  <td>{jobSkill.skill_name}</td>
+                  <td>{jobSkill.race}</td>
                   <td>
-                    <button onClick={() => onEdit(skillBuff)}>Edit</button>
+                    <button onClick={() => onEdit(jobSkill)}>Edit</button>
                   </td>
                 </tr>
               ))}
@@ -74,4 +68,4 @@ const SkillBuffTable: React.FC<Props> = ({ skillBuffs, onEdit }) => {
   );
 };
 
-export default SkillBuffTable;
+export default JobSkillTable;

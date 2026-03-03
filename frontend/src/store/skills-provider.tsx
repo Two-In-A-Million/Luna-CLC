@@ -1,0 +1,272 @@
+import { useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import skillListModel from "../models/skillListModel";
+import skillReqDetail from "../models/skillReqDetail";
+import { useCharacterCtx } from "./char-context";
+import skillDetailModel from "../models/skillDetail";
+import { SkillsContext } from "./skills-context";
+
+export interface SkillContextValue {
+  currSkillLists?: skillListModel[];
+  currSkillLevels: Record<number, number>;
+  currSkillReqDetail: skillReqDetail;
+  currSelectedSkill: skillDetailModel | undefined;
+  isLoading: boolean;
+  updateSkillLevel: ({
+    skill_id,
+    command,
+    max_level,
+  }: {
+    skill_id: number;
+    command: string;
+    max_level: number;
+  }) => string;
+  onClickSkill: ({ skill_id }: { skill_id: number }) => void;
+  updateSpDetail: (skillId: number, changed: string) => Promise<void>;
+  setSelectedSkillId: (skill_id: number | undefined) => void;
+}
+
+export default function SkillsProvider({ children }: { children: ReactNode }) {
+  const { currRace, currCharClass, currJobDetails } = useCharacterCtx();
+
+  const [currSkillLists, setSkillLists] = useState<skillListModel[]>();
+  const [currSkillLevels, setSkillLevels] = useState<Record<number, number>>(
+    {},
+  );
+  const [currSkillReqDetail, setSkillReqDetail] = useState<skillReqDetail>({
+    total_sp: 0,
+    total_gold: 0,
+    sp_remain: 3074,
+  });
+  const [currSelectedSkill, setSelectedSkill] = useState<skillDetailModel>();
+  const [selectedSkillId, setSelectedSkillId] = useState<number>();
+
+  const [isLoading, setLoading] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  const prevSkillLevelRef = useRef<Record<number, number>>({});
+
+  function sleep(milliseconds: number) {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  }
+
+  useEffect(() => {
+    // get skill list
+    async function getSkillListData() {
+      if (firstLoad) {
+        setLoading(true);
+      }
+      let charDetail = {
+        race: currRace,
+        class: currCharClass,
+      };
+
+      currJobDetails.map((jobDetail) => {
+        charDetail = {
+          ...charDetail,
+          [`jobId${jobDetail.levelCap}`]:
+            jobDetail.selected === 0 ? "None" : jobDetail.selected,
+        };
+      });
+
+      let getSkillList = await fetch(
+        "http://localhost:3000/api/get-skill-list",
+        {
+          method: "POST",
+          body: JSON.stringify({ charDetail: charDetail }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      let skillList = await getSkillList.json();
+
+      if (firstLoad) {
+        await sleep(2500);
+      }
+
+      setSkillLists(skillList.query);
+
+      setSkillLevels({});
+
+      setSkillReqDetail({
+        total_sp: 0,
+        total_gold: 0,
+        sp_remain: 3074,
+      });
+
+      if (firstLoad) {
+        setLoading(false);
+        setFirstLoad(false);
+      }
+    }
+
+    getSkillListData();
+  }, [currJobDetails, currRace, currCharClass]);
+
+  useEffect(() => {
+    if (!selectedSkillId) {
+      setSelectedSkill(undefined);
+      return;
+    }
+
+    let curId = parseInt(
+      selectedSkillId.toString() +
+        (currSkillLevels[selectedSkillId]
+          ? currSkillLevels[selectedSkillId] == 0
+            ? 1
+            : currSkillLevels[selectedSkillId]
+          : 1
+        )
+          .toString()
+          .padStart(2, "0"),
+    );
+
+    fetchSkillDetail({ skill_id: curId });
+  }, [selectedSkillId]);
+
+  useEffect(() => {
+    prevSkillLevelRef.current = currSkillLevels;
+  }, [currSkillReqDetail]);
+
+  useEffect(() => {
+    setSelectedSkillId(undefined);
+    setSelectedSkill(undefined);
+  }, [currRace, currCharClass]);
+
+  const updateSkillLevel = ({
+    skill_id,
+    command,
+    max_level,
+  }: {
+    skill_id: number;
+    command: string;
+    max_level: number;
+  }) => {
+    if (currSkillLevels[skill_id]) {
+      if (command == "add") {
+        setSkillLevels((prev) => ({
+          ...prev,
+          [skill_id]: Math.min(max_level, (prev[skill_id] ?? 0) + 1),
+        }));
+
+        if (max_level < (currSkillLevels[skill_id] ?? 0) + 1) {
+          return "unchanged";
+        }
+
+        return "plus";
+      } else {
+        setSkillLevels((prev) => ({
+          ...prev,
+          [skill_id]: Math.max(0, (prev[skill_id] ?? 0) - 1),
+        }));
+
+        if (0 > (currSkillLevels[skill_id] ?? 0) - 1) {
+          return "unchanged";
+        }
+
+        return "minus";
+      }
+    } else {
+      command == "add" &&
+        setSkillLevels((prev) => ({
+          ...prev,
+          [skill_id]: (prev[skill_id] ?? 0) + 1,
+        }));
+
+      return "plus";
+    }
+  };
+
+  const updateSpDetail = async (skillId: number, changed: string) => {
+    if (!skillId) {
+      return;
+    }
+
+    let curLevel = 0;
+
+    if (changed === "minus") {
+      curLevel = currSkillLevels[skillId] ?? 1;
+    } else if (changed === "plus") {
+      curLevel = currSkillLevels[skillId] ? currSkillLevels[skillId] + 1 : 1;
+    }
+
+    let curId = parseInt(
+      skillId.toString() + curLevel.toString().padStart(2, "0"),
+    );
+
+    const skillDetail = await fetchSkillDetail({ skill_id: curId });
+
+    if (skillDetail?.skill_point) {
+      const sp =
+        changed === "minus"
+          ? -skillDetail.skill_point
+          : skillDetail.skill_point;
+
+      const validate = currSkillReqDetail.sp_remain;
+
+      if (validate - sp < 0) {
+        setSkillLevels(prevSkillLevelRef.current);
+        alert("Sorry, not enough sp for the next level!");
+      } else {
+        setSkillReqDetail((prev) => ({
+          ...prev,
+          ["total_sp"]: prev.total_sp + sp,
+          ["sp_remain"]: prev.sp_remain - sp,
+        }));
+      }
+    }
+  };
+
+  const onClickSkill = ({ skill_id }: { skill_id: number }) => {
+    setSelectedSkillId(skill_id);
+  };
+
+  const fetchSkillDetail = async ({ skill_id }: { skill_id: number }) => {
+    let skill = {
+      skillId: skill_id,
+    };
+
+    let getSkillDetail = await fetch(
+      "http://localhost:3000/api/get-skill-list-detail",
+      {
+        method: "POST",
+        body: JSON.stringify({ skill: skill }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    let skillDetailRaw = await getSkillDetail.json();
+    let skillDetail = skillDetailRaw.query[0];
+    setSelectedSkill(skillDetail);
+    return skillDetail;
+  };
+
+  return (
+    <SkillsContext.Provider
+      value={{
+        currSkillLists,
+        currSkillLevels,
+        currSkillReqDetail,
+        currSelectedSkill,
+        isLoading,
+        updateSkillLevel,
+        onClickSkill,
+        updateSpDetail,
+        setSelectedSkillId,
+      }}
+    >
+      {children}
+    </SkillsContext.Provider>
+  );
+}
+
+export const useSkillCtx = (): SkillContextValue => {
+  const ctx = useContext(SkillsContext);
+
+  if (!ctx) {
+    throw new Error("useCharacterCtx must be used within a CharacterProvider");
+  }
+
+  return ctx;
+};

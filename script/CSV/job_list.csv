@@ -1,0 +1,116 @@
+1111,Fighter,Human,0
+1121,Guard,Human,20
+1122,Warrior,Human,20
+1131,InfantryMan,Human,40
+1132,Swordman,Human,40
+1133,Mercenary,Human,40
+1141,Phalanx,Human,75
+1142,Knight,Human,75
+1143,Gladiator,Human,75
+1144,Rune Knight,Human,75
+1151,Paladin,Human,105
+1152,Panzer,Human,105
+1153,Crusader,Human,105
+1154,Destroyer,Human,105
+1155,Sword Master,Human,105
+1156,Magnus,Human,105
+1161,Lord,Human,145
+1162,Death Knight,Human,145
+1163,Arc Templar,Human,145
+1211,Fighter,Elf,0
+1221,Guard,Elf,20
+1222,Warrior,Elf,20
+1231,InfantryMan,Elf,40
+1232,Swordman,Elf,40
+1233,Mercenary,Elf,40
+1241,Phalanx,Elf,75
+1242,Knight,Elf,75
+1243,Gladiator,Elf,75
+1244,Rune Knight,Elf,75
+1251,Paladin,Elf,105
+1252,Panzer,Elf,105
+1253,Crusader,Elf,105
+1254,Destroyer,Elf,105
+1255,Sword master,Elf,105
+1256,Magnus,Elf,105
+1261,Lord,Elf,145
+1262,Death Knight,Elf,145
+1263,Arc Templar,Elf,145
+2111,Rogue,Human,0
+2121,Voyager,Human,20
+2122,Ruffian,Human,20
+2131,Archer,Human,40
+2132,Thief,Human,40
+2133,Scout,Human,40
+2141,Ranger,Human,75
+2142,Treasure Hunter,Human,75
+2143,Assassin,Human,75
+2144,Rune Walker,Human,75
+2151,Sniper,Human,105
+2152,Entrapper,Human,105
+2153,Blade Taker,Human,105
+2154,Templar Master,Human,105
+2155,Arch Ranger,Human,105
+2161,Soul Eye,Human,145
+2162,Blood Stalker,Human,145
+2163,Arch Breezer,Human,145
+2211,Rogue,Elf,0
+2221,Voyager,Elf,20
+2222,Ruffian,Elf,20
+2231,Archer,Elf,40
+2232,Thief,Elf,40
+2233,Scout,Elf,40
+2241,Ranger,Elf,75
+2242,Treasure Hunter,Elf,75
+2243,Assassin,Elf,75
+2244,Rune Walker,Elf,75
+2251,Sniper,Elf,105
+2252,Entrapper,Elf,105
+2253,Blade Taker,Elf,105
+2254,Temper Master,Elf,105
+2255,Arc Ranger,Elf,105
+2261,Soul Eye,Elf,145
+2262,Blood Stalker,Elf,145
+2263,Arch Brezeer,Elf,145
+3111,Mage,Human,0
+3121,Cleric,Human,20
+3122,Wizard,Human,20
+3131,Priest,Human,40
+3132,Sorcerer,Human,40
+3133,Monk,Human,40
+3141,Bishop,Human,75
+3142,Warlock,Human,75
+3143,Inquirer,Human,75
+3144,Elemental Master,Human,75
+3151,Cardinal,Human,105
+3152,Soul Arbiter,Human,105
+3153,Grand Master,Human,105
+3154,Necromancer,Human,105
+3155,Rune Master,Human,105
+3161,Saint,Human,145
+3162,Dark Archon,Human,145
+3163,Arch Celebrant,Human,145
+3211,Mage,Elf,0
+3221,Cleric,Elf,20
+3222,Wizard,Elf,20
+3231,Priest,Elf,40
+3232,Sorcerer,Elf,40
+3233,Monk,Elf,40
+3241,Bishop,Elf,75
+3242,Warlock,Elf,75
+3243,Inquirer,Elf,75
+3244,Elemental Master,Elf,75
+3251,Cardinal,Elf,105
+3252,Soul Arbiter,Elf,105
+3253,Grand Master,Elf,105
+3254,Necromancer,Elf,105
+3255,Rune Master,Elf,105
+3261,Saint,Elf,145
+3262,DarkArchon,Elf,145
+3263,ArchCelebrant,Elf,145
+4311,Devil,Devil,10
+4321,Combatant,Devil,20
+4331,Expert,Devil,30
+4341,Master,Devil,40
+4351,ExpandRoad,Devil,50
+4361,Tyrant,Devil,60

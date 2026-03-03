@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { CharacterProvider } from "./store/char-context";
+import SkillsProvider from "./store/skills-provider";
+import MainSection from "./components/main-section/MainSection";
+import AdminLogin from "./components/admin-login/AdminLogin";
+import AdminMenu from "./components/admin-menu/AdminMenu";
+import { useSecretCommands } from "./hooks/useSecretCommands";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [adminMode, setAdminMode] = useState(false);
+  const [adminToken, setAdminToken] = useState<string | null>(null);
+
+
+  useSecretCommands(["shift", "a", "d", "m"], () => {
+    setAdminMode(true);
+  });
+
+  const handleLoginSuccess = (token: string) => {
+    setAdminToken(token);
+  };
+
+  const handleLogout = () => {
+    setAdminToken(null);
+    setAdminMode(false);
+  };
 
   return (
-    <div className='main-div'>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <CharacterProvider>
+      <SkillsProvider>
+       {!adminMode && <MainSection />}
+
+        {adminMode && !adminToken && (
+          <AdminLogin onLoginSuccess={handleLoginSuccess} />
+        )}
+
+        {adminMode && adminToken && (
+          <AdminMenu token={adminToken} onExit={handleLogout} />
+        )}
+      </SkillsProvider>
+    </CharacterProvider>
+  );
 }
 
-export default App
+export default App;

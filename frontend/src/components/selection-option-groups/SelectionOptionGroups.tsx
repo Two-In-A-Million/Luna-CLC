@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import type jobListModel from "../../models/jobListModel";
 import type selectionSectionList from "../../models/selectionSectionList";
 import SelectionOption from "./SelectionOption";

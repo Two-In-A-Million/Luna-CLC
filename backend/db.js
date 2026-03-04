@@ -1,12 +1,18 @@
 import pg from "pg";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const { Pool } = pg;
 
+console.log(process.env.DB_USERNAME);
+
 const pool = new Pool({
-  user: "lunaCalculator",
-  host: "localhost",
-  database: "luna",
-  password: "201007",
-  port: 5432,
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  database: process.env.DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
 pool.on("error", (err) => {
@@ -15,4 +21,3 @@ pool.on("error", (err) => {
 });
 
 export default pool;
-

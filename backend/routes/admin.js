@@ -1,5 +1,7 @@
 import express from "express";
 import { requireAdmin } from "../middleware/authAdmin.js";
+import { uploadLogo } from "../middleware/uploadLogo.js";
+import { uploadLogoFile } from "../controllers/admin/LogoController.js";
 import {
   getAllSkill,
   getSkillById,
@@ -64,5 +66,7 @@ router.put("/job-skills", updateJobSkill);
 //STATUS EFFECT
 router.get("/status-effect/", getAllStatusEffect);
 router.put("/status-effect/:id", updateStatusEffect);
+
+router.post("/logo", uploadLogo, uploadLogoFile);
 
 export default router;

@@ -25,7 +25,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Run build
-        run: npm run build
+        run: npm run build:widget
         working-directory: ./frontend
 
       - name: Move build files

@@ -10,6 +10,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./frontend
 
     steps:
       - name: Checkout repo
@@ -22,15 +26,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./frontend
 
       - name: Run build
         run: npm run build:widget
-        working-directory: ./frontend
 
       - name: Move build files
         run: |
-          cd ./frontend
           mkdir -p public
           cp -r dist/* public/
 

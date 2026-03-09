@@ -4,6 +4,7 @@ import skillReqDetail from "../models/skillReqDetail";
 import { useCharacterCtx } from "./char-context";
 import skillDetailModel from "../models/skillDetail";
 import { SkillsContext } from "./skills-context";
+import { API_URL } from "../config.ts";
 
 export interface SkillContextValue {
   currSkillLists?: skillListModel[];
@@ -69,7 +70,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
       });
 
       let getSkillList = await fetch(
-        "http://localhost:3000/api/get-skill-list",
+        `${API_URL}api/get-skill-list`,
         {
           method: "POST",
           body: JSON.stringify({ charDetail: charDetail }),
@@ -81,7 +82,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
       let skillList = await getSkillList.json();
 
       if (firstLoad) {
-        await sleep(2500);
+        await sleep(9000);
       }
 
       setSkillLists(skillList.query);
@@ -227,7 +228,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
     };
 
     let getSkillDetail = await fetch(
-      "http://localhost:3000/api/get-skill-list-detail",
+      `${API_URL}api/get-skill-list-detail`,
       {
         method: "POST",
         body: JSON.stringify({ skill: skill }),

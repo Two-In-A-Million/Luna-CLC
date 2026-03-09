@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.DA_KI }}
 
       - name: Setup Node
         uses: actions/setup-node@v6

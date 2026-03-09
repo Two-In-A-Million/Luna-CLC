@@ -12,7 +12,7 @@ permissions:
   
 jobs:
   build:
-    if: github.actor != 'auto-build-bot'
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     
     defaults:

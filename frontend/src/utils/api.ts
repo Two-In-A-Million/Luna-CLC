@@ -1,10 +1,14 @@
+import { API_URL } from "../config.ts";
+
 export const apiFetch = async (url: string, options: RequestInit = {}) => {
   const token = localStorage.getItem("adminToken");
 
-  const response = await fetch(`http://localhost:3000/api/admin${url}`, {
+  const isFormData = options.body instanceof FormData;
+
+  const response = await fetch(`${API_URL}api/admin${url}`, {
     ...options,
     headers: {
-      "Content-Type": "application/json",
+      ...(isFormData ? {} : { "Content-Type": "application/json" }),
       Authorization: `Bearer ${token}`,
       ...options.headers,
     },

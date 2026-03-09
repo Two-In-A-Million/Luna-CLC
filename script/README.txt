@@ -3,4 +3,4 @@ docker exec -it pg_import psql -U lunaCalculator -d luna -f /script/SQL/import_t
 
 
 RUN ALL:
-docker exec -it pg_import bash /script/SQL/run_all.sh
+docker exec -it pg_import bash /script/bash/run_all.sh

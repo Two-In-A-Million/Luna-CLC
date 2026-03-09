@@ -1,4 +1,4 @@
-import archerIcon from "../../assets/archery.png";
+import defaultIcon from "../../assets/default.svg";
 import type skillListModel from "../../models/skillListModel";
 import { useSkillCtx } from "../../store/skills-provider";
 import ProgressBar from "../progress-bar/ProgressBar";
@@ -13,13 +13,15 @@ export default function SkillCard({
 }) {
   const {onClickSkill} = useSkillCtx();
 
+  console.log(`http://localhost:3000/uploads/logo/${encodeURIComponent(skill.skill_name)}.png`);
+
   return (
     <div className={classes.skillCard} title={skill.skill_name} onClick={()=>onClickSkill({skill_id: skill.skill_id_trim})}>
       <div className={classes.imgContainer}>
         <img
           src={`http://localhost:3000/uploads/logo/${encodeURIComponent(skill.skill_name)}.png`}
           onError={(e) => {
-            e.currentTarget.src = archerIcon;
+            e.currentTarget.src = defaultIcon;
           }}
           className="skill-icon"
         />

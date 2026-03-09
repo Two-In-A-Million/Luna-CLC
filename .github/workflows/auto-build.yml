@@ -1,0 +1,35 @@
+name: Auto Build
+
+on:
+  push:
+    branches:
+      - test
+      - pre-prod
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ''
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Run build
+        run: npm run build
+        working-directory: ./frontend
+
+      - name: Move build files
+        run: |
+          cd ./frontend
+          mkdir -p public
+          cp -r dist/* public/

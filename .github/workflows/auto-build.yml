@@ -7,8 +7,12 @@ on:
       - pre-prod
       - main
 
+permissions:
+  contents: write
+  
 jobs:
   build:
+    if: github.actor != 'auto-build-bot'
     runs-on: ubuntu-latest
     
     defaults:

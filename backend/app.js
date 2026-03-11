@@ -19,17 +19,31 @@ app.use(express.json());
 //   next();
 // });
 
+// app.use(cors({
+//   origin: "http://localhost:5173",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+// }));
+
+const allowedOrigins = [
+  process.env.STAGING_URL,
+  process.env.PROD_URL,
+  process.env.LOCAL_URL
+].filter(Boolean);
+
 app.use(cors({
   origin: "http://localhost:5173", // your frontend port
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+  allowedHeaders: ["Content-Type", "Authorization"]
+}))
 
+app.set("trust proxy", 1);
 
 // Routes
 app.use("/api", apiRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/uploads", express.static("uploads"));
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");

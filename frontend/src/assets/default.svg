@@ -1,0 +1,33 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffd85e"/>
+      <stop offset="100%" stop-color="#f1a600"/>
+    </linearGradient>
+  </defs>
+
+  <!-- dark background -->
+  <rect x="4" y="4" width="120" height="120" rx="14"
+        fill="#1b1e3a"
+        stroke="#3c3f7a"
+        stroke-width="4"/>
+
+  <!-- luna style star -->
+  <path
+    d="M64 32
+       L74 54
+       L98 58
+       L80 74
+       L84 98
+       L64 86
+       L44 98
+       L48 74
+       L30 58
+       L54 54 Z"
+    fill="url(#goldGrad)"
+    stroke="#b67c00"
+    stroke-width="3"
+    stroke-linejoin="round"/>
+
+</svg>

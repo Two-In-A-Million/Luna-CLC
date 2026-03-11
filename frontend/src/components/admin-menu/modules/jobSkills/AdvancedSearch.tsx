@@ -2,50 +2,53 @@ import { useState, useEffect } from "react";
 import styles from "../../AdvancedSearch.module.css";
 
 interface Props {
-  skillBuffs: any[];
+  jobSkills: any[];
   onFilter: (filtered: any[]) => void;
 }
 
-const AdvancedSearch: React.FC<Props> = ({ skillBuffs, onFilter }) => {
-  const [searchId, setSearchId] = useState("");
-  const [searchTooltip, setSearchTooltip] = useState("");
+const AdvancedSearch: React.FC<Props> = ({ jobSkills, onFilter }) => {
+  const [searchSkillName, setSearchSkillName] = useState("");
+  const [searchJobName, setSearchJobName] = useState("");
 
   useEffect(() => {
-    let filtered = [...skillBuffs];
+    let filtered = [...jobSkills];  
 
-    if (searchId) {
+    console.log(searchJobName);
+    console.log(searchSkillName);
+
+    if (searchSkillName) {
       filtered = filtered.filter((s) =>
-        String(s.job_id).includes(searchId)
+        s.skill_name.toLowerCase().includes(searchSkillName.toLowerCase())
       );
     }
 
-    if (searchTooltip) {
+    if (searchJobName) {
       filtered = filtered.filter((s) =>
-        s.job_name.toLowerCase().includes(searchTooltip.toLowerCase())
+        s.job_name.toLowerCase().includes(searchJobName.toLowerCase())
       );
     }
 
     onFilter(filtered);
-  }, [searchId, searchTooltip, skillBuffs]);
-
+  }, [searchSkillName, searchJobName, jobSkills])
+  
   return (
     <div className={styles.searchContainer}>
       <input
-        placeholder="Search Skill ID"
-        value={searchId}
-        onChange={(e) => setSearchId(e.target.value)}
+        placeholder="Search Skill Name"
+        value={searchSkillName}
+        onChange={(e) => setSearchSkillName(e.target.value)}
       />
 
       <input
-        placeholder="Search Tooltip"
-        value={searchTooltip}
-        onChange={(e) => setSearchTooltip(e.target.value)}
+        placeholder="Search Job Name"
+        value={searchJobName}
+        onChange={(e) => setSearchJobName(e.target.value)}
       />
 
       <button
         onClick={() => {
-          setSearchId("");
-          setSearchTooltip("");
+          setSearchSkillName("");
+          setSearchJobName("");
         }}
       >
         Reset

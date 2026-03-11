@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import type jobListModel from "../models/jobListModel";
+import { API_URL } from "../config.ts";
 
 interface JobDetail {
   sectionName: string;
@@ -59,7 +60,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
     meta.content = "width=device-width, initial-scale=1";
 
     async function fetchJobList() {
-      const res = await fetch("http://localhost:3000/api/get-job-list", {
+      const res = await fetch(`${API_URL}api/get-job-list`, {
         method: "POST",
         body: JSON.stringify({
           charDetail: { race: currRace, class: currCharClass },

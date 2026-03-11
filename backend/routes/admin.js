@@ -60,8 +60,8 @@ router.get("/jobs/", getAllJobs);
 router.put("/jobs/:id", updateJob);
 
 //JOBS SKILL
-router.get("/job-skills", getAllJobSkills);
-router.put("/job-skills", updateJobSkill);
+router.get("/job-skills/", getAllJobSkills);
+router.put("/jobs/:id", updateJobSkill);
 
 //STATUS EFFECT
 router.get("/status-effect/", getAllStatusEffect);

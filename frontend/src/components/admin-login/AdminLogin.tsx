@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./AdminLogin.module.css";
+import { API_URL } from "../../config.ts";
 
 interface Props {
   onLoginSuccess: (token: string) => void;
@@ -13,7 +14,7 @@ const AdminLogin: React.FC<Props> = ({ onLoginSuccess }) => {
   const handleLogin = async () => {
     setError("");
 
-    const res = await fetch("http://localhost:3000/api/auth/login", {
+    const res = await fetch(`${API_URL}api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

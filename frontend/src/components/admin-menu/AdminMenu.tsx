@@ -5,7 +5,8 @@ import JobsPage from "./modules/jobs/JobsPage";
 import TooltipsPage from "./modules/tooltip/TooltipsPage";
 import StatusEffectPage from "./modules/statusEffect/StatusEffectPage";
 import SkillBuffPage from "./modules/skillBuff/SkillBuffPage";
-// import JobSkills from "./modules/JobSkills";
+import JobSkillsPage from "./modules/jobSkills/JobSkillsPage";
+import LogoUploadPage from "./modules/logoUpload/LogoUploadPage";
 
 interface AdminMenuProps {
   onExit: () => void;
@@ -75,6 +76,14 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ onExit }) => {
           >
             Tooltip
           </button>
+          <button
+              className={`${styles.navButton} ${
+                activeTab === "logoUpload" ? styles.active : ""
+              }`}
+              onClick={() => setActiveTab("logoUpload")}
+            >
+              Logo Upload
+          </button>
         </nav>
 
         <button className={styles.sidebarExit} onClick={onExit}>
@@ -85,11 +94,12 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ onExit }) => {
       {/* MAIN CONTENT */}
       <main className={styles.adminMain}>
         {activeTab === "jobs" && <JobsPage />}
-        {/* {activeTab === "jobSkills" && <JobSkills />} */}
+        {activeTab === "jobSkills" && <JobSkillsPage />}
         {activeTab === "skills" && <SkillsPage />}
         {activeTab === "skillBuff" && <SkillBuffPage />}
         {activeTab === "statusEffect" && <StatusEffectPage />}
         {activeTab === "tooltip" && <TooltipsPage />}
+        {activeTab === "logoUpload" && <LogoUploadPage />}
       </main>
     </div>
   );

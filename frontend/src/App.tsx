@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { CharacterProvider } from "./store/char-context";
-import SkillsProvider, { useSkillCtx } from "./store/skills-provider";
+import SkillsProvider from "./store/skills-provider";
 import MainSection from "./components/main-section/MainSection";
 import AdminLogin from "./components/admin-login/AdminLogin";
 import AdminMenu from "./components/admin-menu/AdminMenu";

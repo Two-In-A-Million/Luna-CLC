@@ -30,6 +30,7 @@ export default function SearchableSelect({
     options.find(opt => opt.value === value) || null;
 
   const handleChange = (option: any) => {
+    console.log(option);
     onChange(option ? option.value : null);
   };
 

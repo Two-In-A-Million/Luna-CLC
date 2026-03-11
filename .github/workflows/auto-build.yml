@@ -1,0 +1,52 @@
+name: Auto Build
+
+on:
+  push:
+    branches:
+      - test
+      - pre-prod
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.DA_KI }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ''
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm run build:widget
+
+      - name: Move build files
+        run: |
+          mkdir -p public
+          cp -r dist/* public/
+
+      - name: Commit build
+        run: |
+          git config user.name "auto-build-bot"
+          git config user.email "bot@github-actions.local"
+          git add public
+          git commit -m "Auto build widget" || echo "No changes"
+          git push
+

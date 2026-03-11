@@ -1,0 +1,85 @@
+.container {
+  font-family: "VT323", monospace;
+  color: #eaf6ff;
+  max-width: 500px;
+}
+
+/* Header */
+
+.title {
+  font-size: 1.4rem;
+  border-bottom: 1px solid #3a3a5c;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Form */
+
+.formGroup {
+  margin-bottom: 1.2rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1.1rem;
+  color: #ffd700;
+}
+
+.input {
+  width: 100%;
+  padding: 0.6rem;
+  background-color: #222244;
+  border: 1px solid #3a3a5c;
+  color: #eaf6ff;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ffd700;
+  background-color: #2a2a4a;
+}
+
+/* File input */
+
+.fileInput {
+  width: 100%;
+  padding: 0.4rem;
+  color: #eaf6ff;
+  font-family: inherit;
+}
+
+/* Actions */
+
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.5rem 1.2rem;
+  font-family: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: 1px solid #4a4a7c;
+  background-color: #3a3a5c;
+  color: #eaf6ff;
+  transition: 0.2s;
+}
+
+.button:hover {
+  border-color: #ffd700;
+  background-color: #4a4a7c;
+}
+
+/* Message */
+
+.message {
+  margin-top: 1rem;
+  color: #ffd700;
+  font-size: 1.1rem;
+}

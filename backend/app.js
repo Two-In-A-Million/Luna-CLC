@@ -19,12 +19,33 @@ app.use(express.json());
 //   next();
 // });
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+// app.use(cors({
+//   origin: "http://localhost:5173",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+// }));
 
+const allowedOrigins = [
+  process.env.STAGING_URL,
+  process.env.PROD_URL,
+  process.env.LOCAL_URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: function(origin, callback) 
+  {
+    if (!origin || allowedOrigins.includes(origin)) 
+    {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}))
+
+app.set("trust proxy", 1);
 
 // Routes
 app.use("/api", apiRoutes);

@@ -8,6 +8,7 @@
   },
   "type" : "module",
   "author": "",
+  "type" : "module",
   "license": "ISC",
   "keywords": [],
   "dependencies": {

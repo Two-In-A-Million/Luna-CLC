@@ -4,9 +4,18 @@ import type skillListModel from "../../models/skillListModel";
 
 export default function SkillOptions({ skillOptions, skillLevels }: { skillOptions: skillListModel[] | undefined, skillLevels: Record<number, number> }) {
 
-    const skillFiltered = Array.from(
-        new Map<number, skillListModel>(skillOptions?.map(skill => [skill.skill_id_trim, skill] as [number, skillListModel]).reverse()).values()
-    ).reverse();
+    const skillFiltered = Object.values(
+        (skillOptions ?? []).reduce((acc, skill) => {
+            const existing = acc[skill.skill_id_trim];
+            const currLevel = skillLevels[skill.skill_id_trim] ? skillLevels[skill.skill_id_trim] : 1;
+
+            if (!existing || skill.max_level > existing.max_level) {
+                acc[skill.skill_id_trim] = skill;
+            }
+
+            return acc;
+        }, {} as Record<number, skillListModel>)
+    );
 
     return (
         <div className={classes.skillMainDiv}>

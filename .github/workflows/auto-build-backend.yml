@@ -4,8 +4,11 @@ on:
   push:
     branches:
       - test
+      - preprod
+      - main
     paths:
       - "backend/**"
+      - "script/**"
 
 jobs:
   build-and-deploy:
@@ -36,7 +39,7 @@ jobs:
           script: |
             cd /var/www/Luna-CLC/backend
             git fetch origin
-            git checkout test
-            git pull origin test
+            git checkout main
+            git pull origin main
             npm install
             pm2 restart backend || pm2 start app.js --name backend

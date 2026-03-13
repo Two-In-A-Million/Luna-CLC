@@ -1,6 +1,4 @@
 
-import cdIcon from "../../assets/cooldown.png";
-import manaIcon from "../../assets/mana.png";
 import classes from "./SkillMainInfo.module.css";
 import defaultIcon from "../../assets/default.svg";
 import { API_URL } from "../../config.ts";
@@ -36,7 +34,7 @@ export default function SkillMainInfo({
       <span className={classes.skillStats}>
         <div>
           <img
-            src={cdIcon}
+            src={`${API_URL}uploads/logo/cooldown.png`}
             alt="cd icon"
             style={{ width: "2rem", height: "2rem" }}
           />
@@ -44,7 +42,7 @@ export default function SkillMainInfo({
         </div>
         <div>
           <img
-            src={manaIcon}
+            src={`${API_URL}uploads/logo/mana.png`}
             alt="mana icon"
             style={{ width: "2rem", height: "2rem" }}
           />

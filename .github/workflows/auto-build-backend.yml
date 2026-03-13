@@ -6,6 +6,7 @@ on:
       - test
     paths:
       - "backend/**"
+      - "scruot/**"
 
 jobs:
   build-and-deploy:

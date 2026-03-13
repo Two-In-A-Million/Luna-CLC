@@ -82,7 +82,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
       let skillList = await getSkillList.json();
 
       if (firstLoad) {
-        await sleep(9000);
+        await sleep(3000);
       }
 
       setSkillLists(skillList.query);

@@ -1,8 +1,8 @@
 
-import cdIcon from "../../assets/cooldown.png";
-import manaIcon from "../../assets/mana.png";
 import classes from "./SkillMainInfo.module.css";
-import archerIcon from "../../assets/archery.png";
+import defaultIcon from "../../assets/default.svg";
+import { API_URL } from "../../config.ts";
+
 
 export default function SkillMainInfo({
   skillName,
@@ -19,9 +19,9 @@ export default function SkillMainInfo({
     <div className={classes.mainInfoCard}>
       <div className={classes.mainInfo}>
         <img
-          src={`/src/assets/${skillName}.png`}
+          src={`${API_URL}uploads/logo/${encodeURIComponent(skillName ?? "")}.png`}
           onError={(e) => {
-            e.currentTarget.src = archerIcon;
+            e.currentTarget.src = defaultIcon;
           }}
           alt="skill icon"
           style={{ width: "4rem", height: "4rem" }}
@@ -34,7 +34,7 @@ export default function SkillMainInfo({
       <span className={classes.skillStats}>
         <div>
           <img
-            src={cdIcon}
+            src={`${API_URL}uploads/logo/cooldown.png`}
             alt="cd icon"
             style={{ width: "2rem", height: "2rem" }}
           />
@@ -42,16 +42,18 @@ export default function SkillMainInfo({
         </div>
         <div>
           <img
-            src={manaIcon}
+            src={`${API_URL}uploads/logo/mana.png`}
             alt="mana icon"
             style={{ width: "2rem", height: "2rem" }}
           />
           <p className="skill-mana"> Mana: {skillMana} </p>
         </div>
       </span>
-      <div>
-        <p className={classes.skillEquip}>Equipment type: {equipType} </p>
-      </div>
+      {equipType ? (
+        <div>
+          <p className={classes.skillEquip}>Equipment type: {equipType}</p>
+        </div>
+      ) : null}
     </div>
   );
 }

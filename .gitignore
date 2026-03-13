@@ -1,3 +1,4 @@
 Postgres/
 frontend/src/assets/data/
 .env
+node_modules/

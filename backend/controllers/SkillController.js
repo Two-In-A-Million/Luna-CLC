@@ -110,6 +110,7 @@ export async function getSkillDetail(req, res) {
         s.area_data,
         s.skill_effect,
         s.mana,
+        s.life,
         s.target,
         s.cool_time as cooldown,
         replace(sb1.skill_name, '^s', ' ') AS buffname1,

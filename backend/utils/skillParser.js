@@ -9,6 +9,7 @@ export default function parseSkillPayload(input) {
   };
 
   function applyBuffPlaceholder(desc, result) {
+    console.log(desc);
     return desc.replace(
       /\$\{BUFF(\d)\}->\$\{([A-Z]+)\}/g,
       (_,idx, fieldKey) => {
@@ -19,6 +20,8 @@ export default function parseSkillPayload(input) {
         if (!field) return "";
 
         let value = buff[field] ?? "";
+        console.log(field);
+
         switch (field) {
           case 'buffstatus':
             value = value.replace(/([A-Z])/g, ' $1').trim();
@@ -38,6 +41,16 @@ export default function parseSkillPayload(input) {
 
         return `${animationTime}`;
       }
+    ).replace(/\$\{BUFFRATE(\d)\}/g, (_, idx) => {
+      return result[`buff${idx}`]?.buffrate ?? "";
+      }
+    ).replace(/\$\{BUFFSTATUS(\d)\}/g, (_, idx) => {
+      return result[`buff${idx}`]?.buffstatus ?? "";
+      }
+    ).replace(/\$\{BUFFDELAYTIME(\d)\}/g, (_, idx) => {
+      const value = result[`buff${idx}`]?.buffdelaytime;
+      return value ? (parseInt(value)/1000) + "s" : "";
+      }
     ).replace(
       /\$\{RANGE\}/g, ()=> {
         const range = result.range ?? ""
@@ -56,6 +69,13 @@ export default function parseSkillPayload(input) {
 
         return `${areaData}`;
       }
+    ).replace(/\$\{EQUIPTYPE\}/g, () => {
+      return result.equiptype ?? "";
+      }
+    ).replace(/\$\{LIFEPLUS\}/g, () => {
+      console.log(result);
+      return result.life ?? "";
+      }
     );
   }
 
@@ -72,6 +92,7 @@ export default function parseSkillPayload(input) {
         castingtime: row.casting_time,
         cooldown: (row.cooldown/1000).toString() + 's',
         mana: row.mana,
+        life: row.life,
         target: row.target,
         areadata: row.area_data,
       };

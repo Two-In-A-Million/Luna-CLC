@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - test
-      - preprod
+      - pre-prod
       - main
     paths:
       - "backend/**"

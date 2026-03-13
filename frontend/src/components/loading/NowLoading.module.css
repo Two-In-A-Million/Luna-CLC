@@ -8,7 +8,6 @@
   height: 100dvh;
 }
 
-
 .panel {
   background: #252547;
   border: 3px solid #4a4a7c;
@@ -17,7 +16,7 @@
     4px 4px 0 rgba(0, 0, 0, 0.3);
   position: relative;
 
-  width: 320px;
+  width: 45dvh;
   text-align: center;
   padding: 24px 16px 32px;
   animation: panel-pop 0.2s ease-out;
@@ -121,3 +120,20 @@
   }
 }
 
+@media screen and (max-width: 1000px) {
+  .loadingWrapper {
+    width: 100dvh;
+  }
+
+  .panel {
+    width: 30dvh;
+  }
+
+  .retroLoadingDiv{
+    font-size: 24px;
+  }
+
+  .header {
+    font-size: 12px;
+  }
+}

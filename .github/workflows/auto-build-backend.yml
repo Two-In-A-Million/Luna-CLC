@@ -1,0 +1,46 @@
+name: Backend CI/CD
+
+on:
+  push:
+    branches:
+      - test
+      - pre-prod
+      - main
+    paths:
+      - "backend/**"
+      - "script/**"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /var/www/Luna-CLC/backend
+            git fetch origin
+            git checkout main
+            git pull origin main
+            npm install
+            pm2 restart backend || pm2 start app.js --name backend

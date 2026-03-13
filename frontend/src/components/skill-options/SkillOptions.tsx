@@ -7,7 +7,6 @@ export default function SkillOptions({ skillOptions, skillLevels }: { skillOptio
     const skillFiltered = Object.values(
         (skillOptions ?? []).reduce((acc, skill) => {
             const existing = acc[skill.skill_id_trim];
-            const currLevel = skillLevels[skill.skill_id_trim] ? skillLevels[skill.skill_id_trim] : 1;
 
             if (!existing || skill.max_level > existing.max_level) {
                 acc[skill.skill_id_trim] = skill;

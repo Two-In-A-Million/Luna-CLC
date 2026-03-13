@@ -4,11 +4,12 @@ on:
   push:
     branches:
       - test
-      - preprod
+      - pre-prod
       - main
     paths:
       - "backend/**"
       - "script/**"
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:

@@ -43,6 +43,7 @@
     width: 85dvw;
     padding: 0;
     align-items: center;
+    overflow-y: unset;
   }
 
   .skillSelectionDiv {
@@ -62,6 +63,7 @@
   .skillMainDiv {
     width: 85dvw;
     padding: 0;
+    overflow-y: unset;
   }
 
   .skillSelectionDiv {

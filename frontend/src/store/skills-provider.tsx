@@ -1,4 +1,10 @@
-import { useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import skillListModel from "../models/skillListModel";
 import skillReqDetail from "../models/skillReqDetail";
 import { useCharacterCtx } from "./char-context";
@@ -9,6 +15,7 @@ import { API_URL } from "../config.ts";
 export interface SkillContextValue {
   currSkillLists?: skillListModel[];
   currSkillLevels: Record<number, number>;
+  currSkillNames: Record<number, string>;
   currSkillReqDetail: skillReqDetail;
   currSelectedSkill: skillDetailModel | undefined;
   isLoading: boolean;
@@ -33,6 +40,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
   const [currSkillLevels, setSkillLevels] = useState<Record<number, number>>(
     {},
   );
+  const [currSkillNames, setSkillNames] = useState<Record<number, string>>({});
   const [currSkillReqDetail, setSkillReqDetail] = useState<skillReqDetail>({
     total_sp: 0,
     total_gold: 0,
@@ -69,23 +77,31 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
         };
       });
 
-      let getSkillList = await fetch(
-        `${API_URL}api/get-skill-list`,
-        {
-          method: "POST",
-          body: JSON.stringify({ charDetail: charDetail }),
-          headers: {
-            "Content-Type": "application/json",
-          },
+      let getSkillList = await fetch(`${API_URL}api/get-skill-list`, {
+        method: "POST",
+        body: JSON.stringify({ charDetail: charDetail }),
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+      });
       let skillList = await getSkillList.json();
 
       if (firstLoad) {
         await sleep(3000);
       }
 
+      let data: skillListModel[] = skillList.query;
+
       setSkillLists(skillList.query);
+
+      setSkillNames(
+        data.reduce<Record<number, string>>((acc, skill) => {
+          if (!acc[skill.skill_id_trim]) {
+            acc[skill.skill_id_trim] = skill.skill_name;
+          }
+          return acc;
+        }, {}),
+      );
 
       setSkillLevels({});
 
@@ -186,7 +202,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
     let curLevel = 0;
 
     if (changed === "minus") {
-      curLevel = currSkillLevels[skillId] ?? 1;
+      curLevel = currSkillLevels[skillId] > 1 ? currSkillLevels[skillId] - 1 : 1;
     } else if (changed === "plus") {
       curLevel = currSkillLevels[skillId] ? currSkillLevels[skillId] + 1 : 1;
     }
@@ -227,19 +243,24 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
       skillId: skill_id,
     };
 
-    let getSkillDetail = await fetch(
-      `${API_URL}api/get-skill-list-detail`,
-      {
-        method: "POST",
-        body: JSON.stringify({ skill: skill }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    let getSkillDetail = await fetch(`${API_URL}api/get-skill-list-detail`, {
+      method: "POST",
+      body: JSON.stringify({ skill: skill }),
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+    });
     let skillDetailRaw = await getSkillDetail.json();
     let skillDetail = skillDetailRaw.query[0];
     setSelectedSkill(skillDetail);
+
+    let skillIdTrim = parseInt(skill_id.toString().slice(0, -2));
+
+    setSkillNames((prev) => ({
+      ...prev,
+      [skillIdTrim]: skillDetail.skill_name,
+    }));
+
     return skillDetail;
   };
 
@@ -248,6 +269,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
       value={{
         currSkillLists,
         currSkillLevels,
+        currSkillNames,
         currSkillReqDetail,
         currSelectedSkill,
         isLoading,

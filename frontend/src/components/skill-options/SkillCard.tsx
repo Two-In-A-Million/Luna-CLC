@@ -12,10 +12,10 @@ export default function SkillCard({
   skill: skillListModel;
   skillLevels: Record<number, number>;
 }) {
-  const {onClickSkill} = useSkillCtx();
+  const {onClickSkill, currSkillNames} = useSkillCtx();
 
   return (
-    <div className={classes.skillCard} title={skill.skill_name} onClick={()=>onClickSkill({skill_id: skill.skill_id_trim})}>
+    <div className={classes.skillCard} title={currSkillNames[skill.skill_id_trim]} onClick={()=>onClickSkill({skill_id: skill.skill_id_trim})}>
       <div className={classes.imgContainer}>
         <img
           src={`${API_URL}uploads/logo/${encodeURIComponent(skill.skill_name)}.png`}

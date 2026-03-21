@@ -9,7 +9,6 @@ interface Props {
 
 const BuffTab: React.FC<Props> = ({ data, buffList, onChange }) => {
   const renderBuffRow = (index: number) => {
-    console.log(buffList);
 
     return (
       <div key={index} className={styles.buffRow}>

@@ -8,6 +8,8 @@ export default function SkillInfo() {
 
   let skillDetail = 
   <>
+    <b>Level Req : {currSelectedSkill?.req_player_level}</b>
+    <br />
     SP : {currSelectedSkill?.skill_point}
     <br />
     Gold : {currSelectedSkill?.skill_money}
@@ -20,7 +22,7 @@ export default function SkillInfo() {
       <h2> Skill Information </h2>
       {
         currSelectedSkill && <div className={classes.skillDesc}>
-          <SkillMainInfo skillName={currSelectedSkill.skill_name} skillCD={currSelectedSkill.cooldown} skillMana={currSelectedSkill.mana} equipType={currSelectedSkill.equiptype}/>
+          <SkillMainInfo skillName={currSelectedSkill.skill_name} skillCD={currSelectedSkill.cooldown} skillMana={currSelectedSkill.mana} equipType={currSelectedSkill.equiptype} skillKind={currSelectedSkill.skill_kind}/>
           <SkillMoreInfo title="Skill Description" text={currSelectedSkill.skill_tooltip}/>
           <SkillMoreInfo title="Skill Detail" text={skillDetail}/>
         </div>

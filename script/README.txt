@@ -16,3 +16,14 @@ awk -F',' '{
   }
   print first","second",\""rest"\""
 }' /script/raw_data/SKILL_GET_LIST.txt > JOB_SKILL_RAW.txt
+
+
+
+
+kalau kena error type
+
+docker exec -it pg_import bash
+apt update && apt install -y dos2unix
+dos2unix /script/bash/run_all.sh
+
+bash /script/bash/run_all.sh

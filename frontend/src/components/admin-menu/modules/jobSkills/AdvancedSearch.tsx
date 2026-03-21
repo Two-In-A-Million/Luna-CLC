@@ -13,9 +13,6 @@ const AdvancedSearch: React.FC<Props> = ({ jobSkills, onFilter }) => {
   useEffect(() => {
     let filtered = [...jobSkills];  
 
-    console.log(searchJobName);
-    console.log(searchSkillName);
-
     if (searchSkillName) {
       filtered = filtered.filter((s) =>
         s.skill_name.toLowerCase().includes(searchSkillName.toLowerCase())

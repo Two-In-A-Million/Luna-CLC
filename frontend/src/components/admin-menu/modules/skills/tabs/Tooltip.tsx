@@ -9,7 +9,6 @@ interface TabProps {
 }
 
 const Tooltip: React.FC<TabProps> = ({ data, tooltipList, onChange }) => {
-    console.log(data.skill_tooltip);
     return (
         <div className={styles.container}>
         <h3>Tooltip Configuration</h3>

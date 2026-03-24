@@ -9,11 +9,13 @@ export default function SkillMainInfo({
   skillCD,
   skillMana,
   equipType,
+  skillKind
 }: {
   skillName: string | undefined;
   skillCD: string | undefined;
   skillMana: string | undefined;
   equipType: string | undefined;
+  skillKind: string | undefined;
 }) {
   return (
     <div className={classes.mainInfoCard}>
@@ -28,7 +30,9 @@ export default function SkillMainInfo({
         />
         <span>
           <p className="">{skillName}</p>
-          <p className={classes.active}> Active Skill </p>
+          <p className={skillKind === 'Active' ? classes.active : classes.passive}>
+            {skillKind} Skill
+          </p>
         </span>
       </div>
       <span className={classes.skillStats}>

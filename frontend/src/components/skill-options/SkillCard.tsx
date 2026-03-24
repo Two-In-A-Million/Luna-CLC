@@ -18,7 +18,7 @@ export default function SkillCard({
     <div className={classes.skillCard} title={currSkillNames[skill.skill_id_trim]} onClick={()=>onClickSkill({skill_id: skill.skill_id_trim})}>
       <div className={classes.imgContainer}>
         <img
-          src={`${API_URL}uploads/logo/${encodeURIComponent(skill.skill_name)}.png`}
+          src={`${API_URL}uploads/logo/${encodeURIComponent(currSkillNames[skill.skill_id_trim])}.png`}
           onError={(e) => {
             e.currentTarget.src = defaultIcon;
           }}

@@ -8,10 +8,7 @@ import SkillOptions from "../../components/skill-options/SkillOptions";
 import SkillInfo from "../../components/skill-info/SkillInfo";
 import NowLoading from "../../components/loading/NowLoading";
 
-import mageIcon from "../../assets/mage.png";
-import fighterIcon from "../../assets/fighter.png";
-import archerIcon from "../../assets/rogue.png";
-
+import { API_URL } from "../../config.ts";
 export default function MainSection() {
   const {
     currRace,
@@ -44,19 +41,19 @@ export default function MainSection() {
     {
       label: "Mage",
       title: "Mage class",
-      img: mageIcon,
+      img: `${API_URL}uploads/logo/mage.png`,
       imgButton: true,
     },
     {
       label: "Fighter",
       title: "Fighter class",
-      img: fighterIcon,
+      img: `${API_URL}uploads/logo/fighter.png`,
       imgButton: true,
     },
     {
       label: "Rogue",
       title: "Rogue class",
-      img: archerIcon,
+      img: `${API_URL}uploads/logo/rogue.png`,
       imgButton: true,
     },
   ];

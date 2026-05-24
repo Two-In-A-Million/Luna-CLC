@@ -5,7 +5,9 @@ export default function parseSkillPayload(input) {
     RATE: "buffrate",
     STATUS: "buffstatus",
     STATUSDATA: "buffstatusdata",
-    BUFFDELAYTIME: "buffdelaytime"
+    BUFFDELAYTIME: "buffdelaytime",
+    ARMORTYPE: "buffarmortype",
+    WEAPONTYPE: "buffweapontype"
   };
 
   function applyBuffPlaceholder(desc, result) {
@@ -19,6 +21,7 @@ export default function parseSkillPayload(input) {
         if (!field) return "";
 
         let value = buff[field] ?? "";
+
         switch (field) {
           case 'buffstatus':
             value = value.replace(/([A-Z])/g, ' $1').trim();
@@ -26,6 +29,10 @@ export default function parseSkillPayload(input) {
           case 'buffdelaytime':
             value = (parseInt(value) / 1000).toString() + 's';
             break;
+          case 'buffarmortype':
+            value = value.replace(/([A-Z])/g, ' $1').trim();
+          case 'buffweapontype':
+            value = value.replace(/([A-Z])/g, ' $1').trim();
           default:
             value;
             break;
@@ -38,9 +45,19 @@ export default function parseSkillPayload(input) {
 
         return `${animationTime}`;
       }
+    ).replace(/\$\{BUFFRATE(\d)\}/g, (_, idx) => {
+      return result[`buff${idx}`]?.buffrate ?? "";
+      }
+    ).replace(/\$\{BUFFSTATUS(\d)\}/g, (_, idx) => {
+      return result[`buff${idx}`]?.buffstatus ?? "";
+      }
+    ).replace(/\$\{BUFFDELAYTIME(\d)\}/g, (_, idx) => {
+      const value = result[`buff${idx}`]?.buffdelaytime;
+      return value ? (parseInt(value)/1000) + "s" : "";
+      }
     ).replace(
       /\$\{RANGE\}/g, ()=> {
-        const range = result.range ?? ""
+        const range = (parseInt(result.range)/100) + "m" ?? ""
 
         return `${range}`;
       }
@@ -52,9 +69,21 @@ export default function parseSkillPayload(input) {
       }
     ).replace(
       /\$\{AREADATA\}/g, ()=> {
-        const areaData = result.areadata ?? ""
+        const areaData = (result.area_data)/100 + "m" ?? ""
 
         return `${areaData}`;
+      }
+    ).replace(
+      /\$\{LEVEL\}/g, ()=> {
+        const level = result.level ?? "";
+
+        return `${level}`;
+      }
+    ).replace(/\$\{EQUIPTYPE\}/g, () => {
+      return result.equiptype ?? "";
+      }
+    ).replace(/\$\{LIFEPLUS\}/g, () => {
+      return result.life ?? "";
       }
     );
   }
@@ -67,13 +96,18 @@ export default function parseSkillPayload(input) {
         skill_money: row.skill_money,
         range: row.range,
         equiptype: row.equiptype,
+        skill_kind: row.skill_kind,
         unitdata: row.unitdata,
         animationtime: row.animation_time,
         castingtime: row.casting_time,
         cooldown: (row.cooldown/1000).toString() + 's',
         mana: row.mana,
+        life: row.life,
         target: row.target,
         areadata: row.area_data,
+        req_player_level : row.req_player_level,
+        area_data: row.area_data,
+        level: row.level
       };
 
       for (let i = 1; i <= 5; i++) {
@@ -83,6 +117,8 @@ export default function parseSkillPayload(input) {
           buffstatus: row[`buffstatus${i}`],
           buffstatusdata: row[`buffstatusdata${i}`],
           buffdelaytime: row[`buffdelaytime${i}`] ?? null,
+          buffweapontype: row[`buffweapontype${i}`] ?? null,
+          buffarmortype: row[`buffarmortype${i}`] ?? null,
         };
       }
 

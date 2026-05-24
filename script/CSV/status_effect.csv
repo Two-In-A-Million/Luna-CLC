@@ -1,59 +1,59 @@
-None,1
-Str,2
-Dex,3
-Vit,4
-Int,5
-Wis,6
-All,7
-PhysicAttack,11
-PhysicDefense,12
-MagicAttack,13
-MagicDefense,14
-Accuracy,15
-Avoid,16
-CriticalRate,17
+Strength,1
+Dexterity,2
+Vitality,3
+Intelligence,4
+Wisdom,5
+All,6
+NONE,7
+Physical Attack,11
+Physical Defense,12
+Magical Attack,13
+Magical Defense,14
+Hit,15
+Evasion,16
+Critical Rate,17
 Range,18
-MagicCriticalRate,19
-CriticalDamage,22
-MoveSpeed,23
-Block,24
-CoolTime,25
-CastingProtect,26
+Magic Critical Rate,19
+Critical Damage,22
+Movement Speed,23
+Block Rate,24
+Cooldown,25
+Casting Protect,26
 Hide,27
 Detect,28
-IncreaseDropRate,29
-DecreaseManaRate,30
-MaxLife,31
-MaxMana,32
-LifeRecoverRate,33
-ManaRecoverRate,34
-LifeRecover,35
-ManaRecover,36
+Increase Drop Rate,29
+Decrease Mana Rate,30
+Max Hp,31
+Max Mana,32
+Life Recover Rate,33
+Mana Recover Rate,34
+Life Recover,35
+Mana Recover,36
 Poison,40
 Paralysis,41
-Stun,42
+Stunt,42
 Slip,43
 Freezing,44
 Stone,45
 Silence,46
-BlockAttack,47
+Block Attack,47
 God,48
 Shield,49
 Bleeding,50
 Burning,51
-HolyDamage,52
-MoveStop,53
+Holy Damage,52
+Hold,53
 Attract,54
-ManaBurn,55
+Mana Burn,55
 Reflect,61
 Absorb,62
-DamageToLife,63
-DamageToMana,64
-GetLife,65
-GetMana,66
-GetExp,67
-GetGold,68
-ProtectExp,70
+Damage To Life,63
+Damage To Mana,64
+Get Life,65
+Get Mana,66
+Get Exp,67
+Get Gold,68
+Protect Exp,70
 Attrib_None,71
 Attrib_Earth,72
 Attrib_Water,73
@@ -69,37 +69,37 @@ Bow,85
 Gun,86
 Dagger,87
 Spear,88
-TwoHanded,89
-TwoBlade,90
-OneHanded,91
-RobeArmor,92
-LightArmor,93
-HeavyArmor,94
-ShieldArmor,95
-BothDagger,96
-FishingPole,97
-CookUtil,98
-NormalSpeedRate,100
-PhysicSkillSpeedRate,101
-MagicSkillSpeedRate,102
-NormalPhysicSkillSpeedRate,105
-ConvertHealthWithGivedDamage,106
-ConvertManaWithGivedDamage,107
-EventSkillToVictim,108
-EventSkillToKiller,109
-EnableTwoBlade,110
-UnableUseItem,111
-UnableBuff,112
-IncreaseExpRate,120
-DamageToManaDamage,121
-Push_Target,122
-Push_Operator,123
-PushPull_Target,124
-PushPull_Operator,125
+Two Handed,89
+Two Blade,90
+One Handed,91
+Robe Armor,92
+Light Armor,93
+Heavy Armor,94
+Shield Armor,95
+Both Dagger,96
+Fishing Pole,97
+Cook Util,98
+Normal Speed Rate,100
+Physical Skill Speed Rate,101
+Casting Speed,102
+Attack Speed,105
+Convert Health With Gived Damage,106
+Convert Mana With Gived Damage,107
+Event Skill To Victim,108
+Event Skill To Killer,109
+Enable Dual Weapon,110
+Unable Use Item,111
+Unable Buff,112
+Increase Exp Rate,120
+Damage To Mana Damage,121
+Push Target,122
+Push Operator,123
+Push Pull Target,124
+Push Pull Operator,125
 Punishment,126
 Punisher,127
 Virus,131
 UnSummon,132
-ImmuneFromVirus,134
-NoRequireCheckBot,150
+Immune From Virus,134
+No Require Check Bot,150
 Max,151

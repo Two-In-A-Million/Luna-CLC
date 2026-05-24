@@ -13,6 +13,8 @@ class skillDetailModel {
   cooldown: string;
   mana: string;
   target: string;
+  skill_kind: string;
+  req_player_level: number;
   buff1: SkillBuff[];
   buff2: SkillBuff[];
   buff3: SkillBuff[];
@@ -32,6 +34,8 @@ class skillDetailModel {
     cooldown: string,
     mana: string,
     target: string,
+    skill_kind: string,
+    req_player_level: number,
     buff1: SkillBuff[],
     buff2: SkillBuff[],
     buff3: SkillBuff[],
@@ -50,6 +54,8 @@ class skillDetailModel {
     this.cooldown = cooldown;
     this.mana = mana;
     this.target = target;
+    this.skill_kind = skill_kind;
+    this.req_player_level = req_player_level;
     this.buff1 = buff1;
     this.buff2 = buff2;
     this.buff3 = buff3;

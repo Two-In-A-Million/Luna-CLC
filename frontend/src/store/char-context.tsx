@@ -1,4 +1,3 @@
-// context/CharacterContext.tsx
 import {
   createContext,
   useContext,

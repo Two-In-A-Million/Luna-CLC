@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import type jobListModel from "../models/jobListModel";
-import { API_URL } from "../config.ts";
+import { API_URL, LEVEL_CAP, LEVEL_TIERS } from "../config.ts";
 
 interface JobDetail {
   sectionName: string;
@@ -38,12 +38,14 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
   const [currRace, setRace] = useState("Elf");
   const [currCharClass, setCharClass] = useState("Mage");
   const [currJobLists, setJobLists] = useState(null);
-  const [currJobDetails, setJobDetails] = useState<JobDetail[]>([
-    { sectionName: "level 20", levelCap: 20, selected: 0 },
-    { sectionName: "level 40", levelCap: 40, selected: 0 },
-    { sectionName: "level 75", levelCap: 75, selected: 0 },
-    { sectionName: "level 105", levelCap: 105, selected: 0 },
-  ]);
+  const initialJobDetails = (): JobDetail[] =>
+    LEVEL_TIERS.filter((cap) => cap < LEVEL_CAP).map((cap) => ({
+      sectionName: `level ${cap}`,
+      levelCap: cap,
+      selected: 0,
+    }));
+
+  const [currJobDetails, setJobDetails] = useState<JobDetail[]>(initialJobDetails);
 
   useEffect(() => {
     let meta = document.querySelector(
@@ -62,7 +64,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
       const res = await fetch(`${API_URL}api/get-job-list`, {
         method: "POST",
         body: JSON.stringify({
-          charDetail: { race: currRace, class: currCharClass },
+          charDetail: { race: currRace, class: currCharClass, level_cap: LEVEL_CAP},
         }),
         headers: { "Content-Type": "application/json" },
       });
@@ -72,12 +74,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
     }
 
     fetchJobList();
-    setJobDetails([
-      { sectionName: "level 20", levelCap: 20, selected: 0 },
-      { sectionName: "level 40", levelCap: 40, selected: 0 },
-      { sectionName: "level 75", levelCap: 75, selected: 0 },
-      { sectionName: "level 105", levelCap: 105, selected: 0 },
-    ]);
+    setJobDetails(initialJobDetails());
   }, [currRace, currCharClass]);
 
   const onChangeRace = (race: string) => {

@@ -2782,6 +2782,7 @@
 2300705,"increase ${BUFF1}->${STATUS} quantity ${BUFF1}->${STATUSDATA}."
 2300706,"increase ${BUFF1}->${STATUS} quantity ${BUFF1}->${STATUSDATA}."
 2300707,"increase ${BUFF1}->${STATUS} quantity ${BUFF1}->${STATUSDATA}."
+2300708,"increase ${BUFF1}->${STATUS} quantity ${BUFF1}->${STATUSDATA}."
 2300709,"increase ${BUFF1}->${STATUS} quantity ${BUFF1}->${STATUSDATA}."
 2300710,"increase ${BUFF1}->${STATUS} quantity ${BUFF1}->${STATUSDATA}."
 2300801,"increase ${BUFF1}->${STATUS} quantity ${BUFF1}->${STATUSDATA} when using ${BUFF1}->${WEAPONTYPE}."

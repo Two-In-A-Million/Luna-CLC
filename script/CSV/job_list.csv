@@ -28,7 +28,6 @@
 1255,Sword master,Elf,105
 1256,Magnus,Elf,105
 1261,Lord,Elf,145
-1262,Death Knight,Elf,145
 1263,Arc Templar,Elf,145
 2111,Rogue,Human,0
 2121,Voyager,Human,20
@@ -57,7 +56,6 @@
 2254,Temper Master,Elf,105
 2255,Arc Ranger,Elf,105
 2261,Soul Eye,Elf,145
-2262,Blood Stalker,Elf,145
 2263,Arch Brezeer,Elf,145
 3111,Mage,Human,0
 3121,Cleric,Human,20
@@ -74,7 +72,6 @@
 3154,Necromancer,Human,105
 3161,Saint,Human,145
 3162,Dark Archon,Human,145
-3163,Arch Celebrant,Human,145
 3211,Mage,Elf,0
 3221,Cleric,Elf,20
 3222,Wizard,Elf,20
@@ -88,5 +85,4 @@
 3253,Grand Master,Elf,105
 3255,Rune Master,Elf,105
 3261,Saint,Elf,145
-3262,Dark Archon,Elf,145
 3263,Arch Celebrant,Elf,145

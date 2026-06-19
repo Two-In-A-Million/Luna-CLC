@@ -3,6 +3,7 @@ docker exec -it pg_import psql -U lunaCalculator -d luna -f /script/SQL/import_t
 
 
 RUN ALL:
+docker exec -it pg_import bash -c "sed -i 's/\r$//' /script/bash/run_all.sh" <- run this if get clrf error
 docker exec -it pg_import bash /script/bash/run_all.sh
 
 

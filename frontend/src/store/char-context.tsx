@@ -79,11 +79,19 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
 
   const onChangeRace = (race: string) => {
     setRace((prevRace) => {
+      if (race === "Demon") {
+        setCharClass("Len eopeu Tees");
+      }
+
       if (prevRace != race) {
+        if (prevRace === "Demon") {
+          setCharClass("Mage");
+        }
         return race;
       } else {
         return prevRace;
       }
+
     });
   };
 

@@ -10,7 +10,7 @@ import skillReqDetail from "../models/skillReqDetail";
 import { useCharacterCtx } from "./char-context";
 import skillDetailModel from "../models/skillDetail";
 import { SkillsContext } from "./skills-context";
-import { API_URL } from "../config.ts";
+import { API_URL, SKILL_POINT } from "../config.ts";
 
 export interface SkillContextValue {
   currSkillLists?: skillListModel[];
@@ -44,7 +44,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
   const [currSkillReqDetail, setSkillReqDetail] = useState<skillReqDetail>({
     total_sp: 0,
     total_gold: 0,
-    sp_remain: 3074,
+    sp_remain: SKILL_POINT,
   });
   const [currSelectedSkill, setSelectedSkill] = useState<skillDetailModel>();
   const [selectedSkillId, setSelectedSkillId] = useState<number>();
@@ -108,7 +108,7 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
       setSkillReqDetail({
         total_sp: 0,
         total_gold: 0,
-        sp_remain: 3074,
+        sp_remain: SKILL_POINT,
       });
 
       if (firstLoad) {
@@ -242,6 +242,8 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
     let skill = {
       skillId: skill_id,
     };
+
+    console.log(skill);
 
     let getSkillDetail = await fetch(`${API_URL}api/get-skill-list-detail`, {
       method: "POST",

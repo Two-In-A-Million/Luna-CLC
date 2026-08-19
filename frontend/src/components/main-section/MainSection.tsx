@@ -35,6 +35,12 @@ export default function MainSection() {
       img: null,
       imgButton: false,
     },
+    {
+      label: "Demon",
+      title: "muehehehehe",
+      img: null,
+      imgButton: false,
+    },
   ];
 
   const classOptions = [
@@ -55,14 +61,16 @@ export default function MainSection() {
       title: "Rogue class",
       img: `${API_URL}uploads/logo/rogue.png`,
       imgButton: true,
-    },
+    }
   ];
 
   return (
     <div className="main-div">
-      {isLoading ? (
+      {
+      isLoading ? (
         <NowLoading />
-      ) : (
+      ) : 
+      (
         <>
           <div className="main-card">
             <div className="char-desc-div">
@@ -73,12 +81,16 @@ export default function MainSection() {
                 selected={currRace}
                 onClickEvent={onChangeRace}
               />
-              <ButtonOptions
-                sectionName="class"
-                options={classOptions}
-                selected={currCharClass}
-                onClickEvent={onChangeClass}
-              />
+              {
+                currRace === "Demon" 
+                ? null
+                : <ButtonOptions
+                    sectionName="class"
+                    options={classOptions}
+                    selected={currCharClass}
+                    onClickEvent={onChangeClass}
+                  />
+              }               
               <SelectionOptionGroups
                 sectionLists={currJobDetails}
                 jobLists={currJobLists}

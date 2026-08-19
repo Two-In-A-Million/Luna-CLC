@@ -15,9 +15,6 @@ export async function getAllJobList(req, res) {
             jl.job_id
         FROM 
             job_list jl
-        WHERE 
-            jl.race != 'Devil'
-            AND level != 145
     `);
 
     res.status(200).json({ text: "job-list", query: result.rows });
@@ -35,8 +32,7 @@ export async function getJobList(req, res) {
     FROM 
         job_list jl
     WHERE 
-        jl.race != 'Devil'
-        AND jl.level <= $3
+        jl.level <= $3
         AND jl.level != 0
         AND jl.race = $1
         AND LEFT(jl.job_id::text, 2) = (
@@ -59,8 +55,7 @@ export async function getSkillList(req, res) {
       FROM\
         job_list jl\
       WHERE\
-        jl.race != 'Devil'\
-        AND jl.level = 0\
+        jl.level = 0\
         AND jl.race = '"+charDetail.race+"'\
         AND jl.job_name = '"+charDetail.class+"'\
     ");

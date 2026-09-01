@@ -158,7 +158,7 @@ export async function getSkillDetail(req, res) {
         se5.status_name as buffstatus5
       FROM 
         skills s
-        JOIN skill_tooltip st ON st.skill_idx = s.skill_tooltip
+        LEFT JOIN skill_tooltip st ON st.skill_idx = s.skill_tooltip
         LEFT JOIN LATERAL (SELECT * FROM skills_buff WHERE skill_idx = s.buff_id_1) sb1 ON true
         LEFT JOIN LATERAL (SELECT * FROM skills_buff WHERE skill_idx = s.buff_id_2) sb2 ON true
         LEFT JOIN LATERAL (SELECT * FROM skills_buff WHERE skill_idx = s.buff_id_3) sb3 ON true

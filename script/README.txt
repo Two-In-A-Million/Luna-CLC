@@ -19,7 +19,8 @@ awk -F',' '{
 }' /script/raw_data/SKILL_GET_LIST.txt > JOB_SKILL_RAW.txt
 
 
-
+.\Convert-SkillGetList.ps1 -InputFile .\script\raw_data\SKILL_GET_LIST.txt -OutputFile .\script\raw_data\JOB_SKILL_RAW.txt
+.\Convert-SkillList.ps1 -InputFile .\script\raw_data\SkillList.txt -OutputFile .\SKILL_RAW.csv
 
 kalau kena error type
 

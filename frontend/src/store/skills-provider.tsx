@@ -243,8 +243,6 @@ export default function SkillsProvider({ children }: { children: ReactNode }) {
       skillId: skill_id,
     };
 
-    console.log(skill);
-
     let getSkillDetail = await fetch(`${API_URL}api/get-skill-list-detail`, {
       method: "POST",
       body: JSON.stringify({ skill: skill }),

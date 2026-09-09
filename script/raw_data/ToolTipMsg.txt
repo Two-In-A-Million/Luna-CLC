@@ -57542,10 +57542,13 @@ Construct this item to unlock a powerful buff item.
 Boosts crafting success by 20%.
 Double-click to activate and insert the mold to apply the effect.
 }
+#Msg	30000964
+{	
+Can be used to craft a Selectable Sketch.
+}
 #Msg	30000767
 {	
-A damaged wand infused with leftover magic.
-Can be used as a material to craft a Repeat Stone.
+Can be used to craft a Selectable Sketch.
 }
 #Msg	60000483
 {	
@@ -58191,4 +58194,49 @@ Strike increas +150
 #Msg	9210901
 {	
 Evasion increas +150
+}
+#Msg	26101401
+{	
+Shortens the time required to load your musket, $Buff1$->$Status$ is increased by $Buff1$->$StatusData$, $Buff2$->$Status$ is increased by $Buff2$->$StatusData$ ,
+and $Buff3$->$Status$ is increased by $Buff3$->$StatusData$
+}	
+#Msg	26101402
+{	
+Shortens the time required to load your musket, $Buff1$->$Status$ is increased by $Buff1$->$StatusData$, $Buff2$->$Status$ is increased by $Buff2$->$StatusData$ ,
+and $Buff3$->$Status$ is increased by $Buff3$->$StatusData$
+}	
+#Msg	26101403
+{	
+Shortens the time required to load your musket, $Buff1$->$Status$ is increased by $Buff1$->$StatusData$, $Buff2$->$Status$ is increased by $Buff2$->$StatusData$ ,
+and $Buff3$->$Status$ is increased by $Buff3$->$StatusData$
+}	
+#Msg	26101404
+{	
+Shortens the time required to load your musket, $Buff1$->$Status$ is increased by $Buff1$->$StatusData$, $Buff2$->$Status$ is increased by $Buff2$->$StatusData$ ,
+and $Buff3$->$Status$ is increased by $Buff3$->$StatusData$
+}	
+#Msg	26101405
+{	
+Shortens the time required to load your musket, $Buff1$->$Status$ is increased by $Buff1$->$StatusData$, $Buff2$->$Status$ is increased by $Buff2$->$StatusData$ ,
+and $Buff3$->$Status$ is increased by $Buff3$->$StatusData$
+}
+#Msg	9211201
+{
+Increased attack speed by 5%, critical damage by 7% and move speed by 10%.
+}
+#Msg	9211202
+{
+Increased attack speed by 10%, critical damage by 14% and move speed by 15%.
+}
+#Msg	9211203
+{
+Increased attack speed by 15%, critical damage by 21% and move speed by 20%.
+}
+#Msg	9211204
+{
+Increased attack speed by 20%, critical damage by 28% and move speed by 25%.
+}
+#Msg	9211205
+{
+Increased attack speed by 25%, critical damage by 35% and move speed by 30%.
 }

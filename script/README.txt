@@ -22,6 +22,8 @@ awk -F',' '{
 .\Convert-SkillGetList.ps1 -InputFile .\raw_data\raw_data\SKILL_GET_LIST.txt -OutputFile .\script\raw_data\JOB_SKILL_RAW.txt
 .\Convert-ToolTipMsg.ps1 -InputFile ..\raw_data\ToolTipMsg.txt -OutputFile ..\CSV\tooltip.csv
 .\Convert-SkillList.ps1 -InputFile ..\raw_data\Skill_Buff_List.txt -OutputFile ..\CSV\skillBuffList.csv -FieldCount 34 -AsciiOnly
+.\Convert-SkillList.ps1 -InputFile ..\raw_data\Skill_Buff_List.txt -OutputFile ..\CSV\skillList.csv -FieldCount 54 -AsciiOnly
+
 
 pm2 start cloudflared --name tunnel -- tunnel --no-autoupdate --url http://localhost:5154
 pm2 logs tunnel --lines 50 | grep trycloudflare

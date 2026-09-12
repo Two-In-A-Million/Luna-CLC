@@ -1,5 +1,5 @@
 // export const API_URL = "http://103.189.235.212/";
-export const API_URL = "https://slot-intensive-review-existed.trycloudflare.com/";
+export const API_URL = "https://luna-clc.tail1e2a37.ts.net/";
 // export const API_URL = "http://localhost:3000/";
 export const LEVEL_CAP = 175;
 export const LEVEL_TIERS = [20, 40, 75, 105, 145] as const;
